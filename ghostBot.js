@@ -30,7 +30,7 @@ client.on('message', message =>
     //Bot won't reply to itself
     if (message.author.bot) return;
 
-    if (message.content === "Ghost")
+    if (message.content === 'Ghost')
     {
         message.channel.sendMessage('How can I help you, ' + trump(message.member.displayName, " ?"));
     }
