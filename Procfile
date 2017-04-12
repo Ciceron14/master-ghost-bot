@@ -1,1 +1,1 @@
-web: node ghostBot.js
+worker: node ghostBot.js
