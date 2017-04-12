@@ -23,12 +23,12 @@ client.on('ready', () =>
 client.on('guildMemberAdd', member =>
 {
     let guild = member.guild;
-    guild.channels.get('301180453883478016').sendMessage('A new guardian has joined. Welcome, ' + member.user + ' !' + System.lineSeparator() + "Don't forget to read the #open_broadcast !");
+    guild.channels.get('296718956545441794').sendMessage('A new guardian has joined. Welcome, ' + member.user + ' !' + System.lineSeparator() + "Don't forget to read the #open_broadcast !");
 });
 client.on('guildMemberRemove', member =>
 {
     let guild = member.guild;
-    guild.channels.get('301180453883478016').sendMessage('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
+    guild.channels.get('296718956545441794').sendMessage('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
 });
 
 
