@@ -1,1 +1,1 @@
-worker: node startGhost.bat
+worker: node ghostBot.js
