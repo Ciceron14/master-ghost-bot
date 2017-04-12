@@ -1,80 +1,88 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+
+
 function commandIs(str,msg)
 {
     return msg.content.toLowerCase().startsWith('!' + str);
 }
+function arguments(str)
+{
+    var start_pos = str.indexOf('"') + 1;
+    var end_pos = str.indexOf('"', start_pos);
+    return str.substring(start_pos, end_pos);
+    //return str.substring(str.IndexOf('"') + 1, str.lastIndexOf('"'));
+}
+
 
 client.on('ready', () =>
 {
     console.log('Ghost is online');
 });
 
+
+//WELCOME AND GOODBYE
 client.on('guildMemberAdd', member =>
 {
     let guild = member.guild;
     guild.channels.get('301180453883478016').sendMessage('A new guardian has joined. Welcome, ' + member.user + ' !' + System.lineSeparator() + "Don't forget to read the #open_broadcast !");
 });
-
 client.on('guildMemberRemove', member =>
 {
     let guild = member.guild;
     guild.channels.get('301180453883478016').sendMessage('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
 });
 
+
+//REACT TO MESSAGES IN CHANNEL
 client.on('message', message =>
 {
-    var args = message.content.split(/[ ]+/);
 
-    //Bot won't reply to itself
-    if (message.author.bot) return;
-
-    if (message.content === 'Ghost')
+    //if (message.content.toString().includes('Ghost'))
+    if (message.isMentioned("301176884438368257"))
     {
-        message.channel.sendMessage('How can I help you, ' + trump(message.member.displayName, " ?"));
-    }
+        //Bot informs member of its status
+        if (message.content.toLowerCase().toString().includes('status'))
+        {
+            message.channel.sendMessage('I can run some basic search on the Ishtar database now, ' + trump(message.member.displayName, " ["));
+        }
 
-    //Bot informs member of its wip status
-    if(commandIs("ghost", message))
-    {
-        message.channel.sendMessage('I am not ready yet ' + trump(message.member.displayName, " "));
-    }
-
-    //Bot insults
-    if (commandIs("insult", message))
-    {
-        if (args.length === 1)
+        //Bot does research in ishtar database
+        else if (message.content.toLowerCase().toString().includes('search') && message.content.toLowerCase().toString().includes('ishtar'))
         {
-            message.channel.sendMessage("lol you told me to insult nobody you dumbass. use `!insult + [name of the person to insult]` !");
-        }
-        else if (args.length === 2)
-        {
-            message.channel.sendMessage('you suck dicks ' + args[1]);
-        }
-        else
-        {
-            message.channel.sendMessage('chillout dude, wtf, one at a time');
-        }
-    }
-
-    //Bot lore
-    if (commandIs("lore", message))
-    {
-        if (args.length === 1)
-        {
-            message.channel.sendMessage("I need some keywords to find lore entries Guardian. Please type `!lore + [element to search]` !");
-        }
-        else
-        {
-            var keywords = args.length;
-            var search = '';
-            while (keywords > 1)
+            argString = arguments(message.content.toLowerCase().toString());
+            args = argString.split(" ");
+            if (args.length === 0)
             {
-                search += args[args.length - keywords + 1] + "-";
-                keywords -= 1;
+                message.channel.sendMessage('I need some keywords to find lore entries Guardian. Please include `"keywords"` in your command.');
             }
-            message.channel.sendMessage('http://www.ishtar-collective.net/categories/' + search.substring(0, search.length - 1));
+            else
+            {
+                var keywords = args.length + 1;
+                message.channel.sendMessage("I was given " + (keywords - 1) + " keywords. Here is what I found :");
+                var search = '';
+                while (keywords > 1)
+                {
+                    search += args[args.length - keywords + 1] + "-";
+                    keywords -= 1;
+                }
+                message.channel.sendMessage('http://www.ishtar-collective.net/categories/' + search.substring(0, search.length - 1));
+            }
+        }
+
+        //Bot tells a joke
+        else if (message.content.toLowerCase().toString().includes('joke'))
+        {
+            jokes = ["I had a very good joke, but I Phogoth it", "You're the joke."];
+            i = Math.floor(Math.random() * (jokes.length));
+            message.channel.sendMessage(jokes[i]);
+        }
+
+        //Bot is mentionned but no command is given
+        else
+        {
+            message.channel.sendMessage('How can I help you, ' + trump(message.member.displayName, " ["));
         }
     }
 });
