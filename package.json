@@ -1,0 +1,23 @@
+{
+  "name": "discord_bot",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "4.1.1"
+  },
+  "main": "ghostBot.js",
+  "scripts": {
+    "start": "node ghostBot.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ghost",
+    "bot",
+    "discord"
+  ],
+  "author": "mike_georges",
+  "license": "ISC"
+}

@@ -1,0 +1,2 @@
+node ghostBot.js
+PAUSE
