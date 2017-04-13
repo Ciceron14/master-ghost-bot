@@ -35,7 +35,6 @@ client.on('guildMemberRemove', member =>
 //REACT TO MESSAGES IN CHANNEL
 client.on('message', message =>
 {
-
     //if (message.content.toString().includes('Ghost'))
     if (message.isMentioned("301176884438368257"))
     {
@@ -77,7 +76,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.sendMessage('I need a fireteam name Guardian. Please include `"fireteam name"` in your command.');
+                    message.channel.sendMessage('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -90,7 +89,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
-                    fs.writeFile("fireteams/" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
+                    fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
                         if (err)
                         {
@@ -108,7 +107,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.sendMessage('You need a fireteam to join a fireteam. Please include `"fireteam name"` in your command.');
+                    message.channel.sendMessage('You need a fireteam to join a fireteam. Please include `join, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -120,9 +119,9 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/" + fireteamName + ".txt"))
+                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
                     {
-                        fs.readFile("fireteams/" + fireteamName + ".txt", function (err, data)
+                        fs.readFile("fireteams/-" + fireteamName + ".txt", function (err, data)
                         {
                             if (err)
                             {
@@ -131,19 +130,19 @@ client.on('message', message =>
                             if (data.indexOf(message.member.displayName.toString()) >= 0)
                             {
                                 message.channel.sendMessage('Looks like you already joined that fireteam, here is the current roster :')
-                                fs.readFile("fireteams/" + fireteamName + ".txt", 'utf8', function (err, data)
+                                fs.readFile("fireteams/-" + fireteamName + ".txt", 'utf8', function (err, data)
                                 {
                                     if (err)
                                     {
-                                        message.channel.sendMessage('Hum... I could not read the fireteam roster... are you sure it exists ?')
+                                        message.channel.sendMessage('Hum... well I think you joined but I cannot find it... weird.')
                                     }
                                     message.channel.sendMessage(data);
-                                    message.channel.sendMessage('I will not tell the others that you had forgotten about it, do not worry.')
+                                    message.channel.sendMessage('Anyway, I will not tell the others that you had forgotten about it, do not worry.')
                                 });
                             }
                             else
                             {
-                                fs.appendFile("fireteams/" + fireteamName + ".txt", message.member.displayName.toString() + '\n', function (err)
+                                fs.appendFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + '\n', function (err)
                                 {
                                     if (err)
                                     {
@@ -166,7 +165,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.sendMessage('I need a fireteam name to be able to delete it. Please include `"fireteam name"` in your command.');
+                    message.channel.sendMessage('I need a fireteam name to be able to show the people who joined it. Please include `show, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -179,9 +178,9 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/" + fireteamName + ".txt"))
+                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
                     {
-                        fs.readFile("fireteams/" + fireteamName + ".txt", 'utf8', function (err, data)
+                        fs.readFile("fireteams/-" + fireteamName + ".txt", 'utf8', function (err, data)
                         {
                             if (err)
                             {
@@ -193,7 +192,7 @@ client.on('message', message =>
                     }
                     else
                     {
-                        message.channel.sendMessage('Did you just tell me to delete a fireteam that does not exist ?')
+                        message.channel.sendMessage('Did you just tell me to find a fireteam that does not exist ?')
                     }
                 }
             }
@@ -202,7 +201,7 @@ client.on('message', message =>
             {
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0) {
-                    message.channel.sendMessage('I need a fireteam name to be able to delete it. Please include `"fireteam name"` in your command.');
+                    message.channel.sendMessage('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -215,9 +214,9 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/" + fireteamName + ".txt"))
+                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
                     {
-                        fs.unlink("fireteams/" + fireteamName + ".txt")
+                        fs.unlink("fireteams/-" + fireteamName + ".txt")
                         message.channel.sendMessage('Your fireteam "' + fireteamName + '" has been deleted !');
                     }
                     else
@@ -227,9 +226,14 @@ client.on('message', message =>
                 }
             }
             //SHOW ALL FIRETEAMS
+            else if (message.content.toLowerCase().toString().includes('list'))
+            {
+                message.channel.sendMessage('The list command is not ready yet...')
+            }
+            //UNCOMPLETE COMMAND
             else
             {
-                message.channel.sendMessage('Did you say something guardian ? Add "new", "join" or "show" to your fireteams commands.')
+                message.channel.sendMessage('Did you say something guardian ? Add `new`, `join`, `delete` or `show` to your fireteams commands.')
             }
         }
 
@@ -243,7 +247,7 @@ client.on('message', message =>
                 "Why did the Archon Priest get locked up? \nVandallism.",
                 "What do you call two acolytes claping hands? \nA Hive five.",
                 "Why did the Archon Priest get locked up? \nVandallism.",
-                "Hey, are your pants purple ? \nBecause damn, that ass is legendary.",
+                "Hey, are your pants purple ? \nBecause that ass is legendary.",
                 "I have a crush on one of the Archons... I guess you could say I've Fallen in love.",
                 "I went to a Hive party last week. \nIt was pretty enthralling.",
                 "Why can't Xur get a girlfriend ? \nBecause he doesn't have any Icebreaker.",
