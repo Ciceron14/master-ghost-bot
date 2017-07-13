@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const planned_ops = message.get(334850384860545024);
+let planned_ops = message.get(334850384860545024);
 
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
