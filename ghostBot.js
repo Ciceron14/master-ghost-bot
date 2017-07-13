@@ -4,6 +4,7 @@ const client = new Discord.Client();
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
 
+let planned_ops;
 
 function arguments(str)
 {
@@ -74,7 +75,6 @@ client.on('message', message =>
         //Bot manages fireteams
         else if (message.content.toLowerCase().toString().includes('fireteam'))
         {
-            let planned_ops //= get(334856205174439937);
             //CREATE
             if (message.content.toLowerCase().toString().includes('new'))
             {
