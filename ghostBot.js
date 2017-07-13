@@ -97,7 +97,7 @@ client.on('message', message =>
                     }
                     else
                     {
-                        planned_ops.edit(Is it working ?)
+                        planned_ops.edit(Is it working ?);
                     }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
