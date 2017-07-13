@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-let planned_ops = message.get(334850384860545024);
 
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
@@ -93,7 +92,7 @@ client.on('message', message =>
                     //TEST
                     if (planned_ops == null)
                     {
-                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                        let planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
                     }
                     else
                     {
