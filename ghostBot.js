@@ -4,8 +4,6 @@ const client = new Discord.Client();
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
 
-let planned_ops = new Discord.Message().get(334856205174439937);
-
 function arguments(str)
 {
     var start_pos = str.indexOf('"') + 1;
@@ -75,6 +73,7 @@ client.on('message', message =>
         //Bot manages fireteams
         else if (message.content.toLowerCase().toString().includes('fireteam'))
         {
+            planned_ops = message.channel.lastMessageID;
             //CREATE
             if (message.content.toLowerCase().toString().includes('new'))
             {
@@ -97,11 +96,11 @@ client.on('message', message =>
                     //TEST
                     if (planned_ops == null)
                     {
-                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n').id;
                     }
                     else
                     {
-                        planned_ops.edit("Is it working ?");
+                        message.planned_ops.edit("Is it working ?");
                     }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
@@ -175,7 +174,7 @@ client.on('message', message =>
                     }
                 }
             }
-            //SHOW
+            /*//SHOW
             else if (message.content.toLowerCase().toString().includes('show'))
             {
                 argString = arguments(message.content.toLowerCase().toString());
@@ -211,7 +210,7 @@ client.on('message', message =>
                         message.channel.sendMessage('Did you just tell me to find a fireteam that does not exist ?')
                     }
                 }
-            }
+            }*/
             //DELETE
             else if (message.content.toLowerCase().toString().includes('delete'))
             {
