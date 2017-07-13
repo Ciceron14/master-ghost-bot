@@ -18,6 +18,10 @@ client.on('ready', () =>
     console.log('Ghost is online');
 });
 
+client.on('messageDelete', message =>
+{
+    message.channel.sendMessage("lol waddup");
+});
 
 //WELCOME AND GOODBYE
 client.on('guildMemberAdd', member =>
@@ -70,7 +74,7 @@ client.on('message', message =>
         //Bot manages fireteams
         else if (message.content.toLowerCase().toString().includes('fireteam'))
         {
-            let planned_ops;
+            let planned_ops //= get(334856205174439937);
             //CREATE
             if (message.content.toLowerCase().toString().includes('new'))
             {
