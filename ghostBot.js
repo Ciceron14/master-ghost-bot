@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const planned_ops = message.get(334850384860545024);
 
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
@@ -90,7 +91,14 @@ client.on('message', message =>
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
                     //TEST
-                    message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                    if (planned_ops == null)
+                    {
+                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                    }
+                    else
+                    {
+                        planned_ops.edit(Is it working ?)
+                    }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
