@@ -70,6 +70,7 @@ client.on('message', message =>
         //Bot manages fireteams
         else if (message.content.toLowerCase().toString().includes('fireteam'))
         {
+            let planned_ops;
             //CREATE
             if (message.content.toLowerCase().toString().includes('new'))
             {
@@ -92,7 +93,7 @@ client.on('message', message =>
                     //TEST
                     if (planned_ops == null)
                     {
-                        let planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
                     }
                     else
                     {
