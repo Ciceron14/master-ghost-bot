@@ -89,7 +89,11 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
-                    fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
+                    //TEST
+                    guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                    message.channel.sendMessage('Your fireteam "' + fireteamName + '" has been created !');
+                    });
+                    /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
                         if (err)
                         {
@@ -99,7 +103,7 @@ client.on('message', message =>
                         {
                             message.channel.sendMessage('Your fireteam "' + fireteamName + '" has been created !');
                         }
-                    });
+                    });*/
                 }
             }
             //JOIN
