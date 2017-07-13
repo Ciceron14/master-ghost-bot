@@ -90,8 +90,9 @@ client.on('message', message =>
                     }
                     fireteamName.substring(0, fireteamName.length - 1)
                     //TEST
-                    guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
+                    message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n')
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
+                    
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
                         if (err)
