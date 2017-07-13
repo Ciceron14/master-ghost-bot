@@ -11,6 +11,11 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
+function plannedOperations(message, str)
+{
+    message.edit(message.toString + str);
+}
+
 
 client.on('ready', () =>
 {
@@ -38,6 +43,10 @@ client.on('guildMemberRemove', member =>
 //REACT TO MESSAGES IN CHANNEL
 client.on('message', message =>
 {
+    if (message.channel.id == message.member.guild.channels.get('315332691576750080'))
+    {
+        plannedOperations(message, "add stuff plz")
+    }
     //if (message.content.toString().includes('Ghost'))
     if (message.isMentioned("301176884438368257"))
     {
@@ -73,7 +82,7 @@ client.on('message', message =>
         //Bot manages fireteams
         else if (message.content.toLowerCase().toString().includes('fireteam'))
         {
-            planned_ops = message.channel.lastMessageID;
+            //planned_ops = message.channel.lastMessageID;
             //CREATE
             if (message.content.toLowerCase().toString().includes('new'))
             {
@@ -92,16 +101,17 @@ client.on('message', message =>
                         fireteamName += args[args.length - keywords + 1] + " ";
                         keywords -= 1;
                     }
-                    fireteamName.substring(0, fireteamName.length - 1)
+                    fireteamName.substring(0, fireteamName.length - 1);
                     //TEST
-                    if (planned_ops == null)
+                    /*if (planned_ops == null)
                     {
                         planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n').id;
                     }
                     else
                     {
                         message.planned_ops.edit("Is it working ?");
-                    }
+                    }*/
+                    message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n');
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
