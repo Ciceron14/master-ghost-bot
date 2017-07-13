@@ -4,7 +4,7 @@ const client = new Discord.Client();
 var fs = require('fs');
 //var finder = require('findit').find(__dirname);
 
-let planned_ops = new Discord.Message();
+let planned_ops = new Discord.Message().get(334856205174439937);
 
 function arguments(str)
 {
