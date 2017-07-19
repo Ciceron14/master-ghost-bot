@@ -22,11 +22,6 @@ client.on('ready', () =>
     console.log('Ghost is online');
 });
 
-client.on('messageDelete', message =>
-{
-    message.channel.sendMessage("lol waddup");
-});
-
 //WELCOME AND GOODBYE
 client.on('guildMemberAdd', member =>
 {
@@ -111,7 +106,8 @@ client.on('message', message =>
                     {
                         message.planned_ops.edit("Is it working ?");
                     }*/
-                    message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n');
+                    var OG = message.member.guild.channels.get('315332691576750080').fetchPinnedMessages();
+                    OG.edit("Edited that fucker");
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
