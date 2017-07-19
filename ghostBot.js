@@ -111,6 +111,7 @@ client.on('message', message =>
                     {
                         plan.edit("Edited that fucker");
                         console.log(plan.toString);
+                        console.log(ID);
                     }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
