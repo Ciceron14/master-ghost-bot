@@ -107,7 +107,10 @@ client.on('message', message =>
                         message.planned_ops.edit("Is it working ?");
                     }*/
                     var OG = message.member.guild.channels.get('315332691576750080').fetchPinnedMessages();
-                    OG.edit("Edited that fucker");
+                    for (var [ID, plan] of OG) 
+                    {
+                        plan.edit("Edited that fucker");
+                    }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
