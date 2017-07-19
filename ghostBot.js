@@ -110,7 +110,7 @@ client.on('message', message =>
                     for (var [ID, plan] of Array.from(OG)) 
                     {
                         plan.edit("Edited that fucker");
-                        contsole.log(plan.toString);
+                        console.log(plan.toString);
                     }
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
