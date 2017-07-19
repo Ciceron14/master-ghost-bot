@@ -16,9 +16,8 @@ function arguments(str)
 function plannedOperations(ID, str)
 {
     client.channels.get('315332691576750080').fetchMessage(ID)
-        .then(message => console.log(message.content))
+        .then(message => message.edit(message.toString + str))
         .catch(console.error);
-    //plan.edit(plan.toString + str);
 }
 
 
