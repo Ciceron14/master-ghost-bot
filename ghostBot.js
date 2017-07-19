@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var fs = require('fs');
-var nf = require('node-fetch');
+//var nf = require('node-fetch');
 
 function arguments(str)
 {
