@@ -106,7 +106,7 @@ client.on('message', message =>
                     {
                         message.planned_ops.edit("Is it working ?");
                     }*/
-                    var OG = message.member.guild.channels.get('315332691576750080').fetchPinnedMessages();
+                    var OG = message.member.guild.channels.get('315332691576750080').fetchMessages();
                     console.log(Array.from(OG));
                     for (var [ID, plan] of Array.from(OG)) 
                     {
