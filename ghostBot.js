@@ -11,6 +11,8 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
+
+//fuck this
 function plannedOperations(ID, str)
 {
     plan = message.member.guild.channels.get('315332691576750080').fetchMessage(334875452554608640)
