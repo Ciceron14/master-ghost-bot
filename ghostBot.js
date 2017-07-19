@@ -107,13 +107,14 @@ client.on('message', message =>
                         message.planned_ops.edit("Is it working ?");
                     }*/
                     var OG = message.member.guild.channels.get('315332691576750080').fetchPinnedMessages();
+                    console.log(Array.from(OG));
                     for (var [ID, plan] of Array.from(OG)) 
                     {
                         plan.edit("Edited that fucker");
                         console.log(plan.toString);
                         console.log(ID);
                     }
-                    message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
+                    message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !' + Array.from(OG));
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
