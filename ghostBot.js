@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var fs = require('fs');
-//var finder = require('findit').find(__dirname);
+var nf = require('node-fetch');
 
 function arguments(str)
 {
@@ -11,9 +11,11 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
-function plannedOperations(message, str)
+function plannedOperations(ID, str)
 {
-    message.edit(message.toString + str);
+    plan = message.member.guild.channels.get('315332691576750080').fetchMessage(334875452554608640)
+        .then console.log(Array.from(OG));
+    plan.edit(plan.toString + str);
 }
 
 
@@ -106,10 +108,7 @@ client.on('message', message =>
                     {
                         message.planned_ops.edit("Is it working ?");
                     }*/
-                    var OG = message.member.guild.channels.get('315332691576750080').fetchMessage(334875452554608640);
-                    //console.log(Array.from(OG));
-                    console.log(OG);
-                    OG.edit("Edited that fucker");
+                    plannedOperations(334875452554608640, "Edited that fucker");
                     /*for (var [ID, plan] of Array.from(OG)) 
                     {
                         plan.edit("Edited that fucker");
