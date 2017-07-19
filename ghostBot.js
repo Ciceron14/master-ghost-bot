@@ -15,8 +15,9 @@ function arguments(str)
 //fuck this
 function plannedOperations(ID, str)
 {
-    plan = message.member.guild.channels.get('315332691576750080').fetchMessage(334875452554608640)
-        .then console.log(Array.from(OG));
+    channel.fetchMessage(ID)
+        .then(message => console.log(message.content))
+        .catch(console.error);
     plan.edit(plan.toString + str);
 }
 
@@ -110,14 +111,14 @@ client.on('message', message =>
                     {
                         message.planned_ops.edit("Is it working ?");
                     }*/
-                    plannedOperations(334875452554608640, "Edited that fucker");
+                    plannedOperations('334875452554608640', "Edited that fucker");
                     /*for (var [ID, plan] of Array.from(OG)) 
                     {
                         plan.edit("Edited that fucker");
                         console.log(plan.toString);
                         console.log(ID);
                     }*/
-                    message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !' + Array.from(OG));
+                    message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
