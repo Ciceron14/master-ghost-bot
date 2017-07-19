@@ -108,6 +108,7 @@ client.on('message', message =>
                     }*/
                     var OG = message.member.guild.channels.get('315332691576750080').fetchMessages();
                     console.log(Array.from(OG));
+                    console.log(OG);
                     for (var [ID, plan] of Array.from(OG)) 
                     {
                         plan.edit("Edited that fucker");
