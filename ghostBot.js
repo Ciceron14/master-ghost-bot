@@ -76,7 +76,7 @@ client.on('message', message =>
 
             else if (initializing[col/2][1] == 2) //RECEIVE NAME + ASK FOR CLAN OR ALLY
             {
-                if ((message.content.toString().includes == " [") && (message.content.toString().includes == "]") && (message.content.toString().length >= 7))
+                if ((message.content.toString().includes == " [") && (message.content.toString().includes == "]"))
                 {
                     message.channel.sendMessage("Got it. I'm entering it in the database.");
                     message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
