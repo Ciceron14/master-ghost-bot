@@ -28,13 +28,13 @@ client.on('ready', () =>
 client.on('guildMemberAdd', member =>
 {
     let guild = member.guild;
-    guild.channels.get('296718956545441794').sendMessage("I'm receiving signals... I think it's a guardian !");
-    guild.channels.get('296718956545441794').sendMessage("I'll try to initialize them");
+    guild.channels.get('296718956545441794').send("I'm receiving signals... I think it's a guardian !");
+    guild.channels.get('296718956545441794').send("I'll try to initialize them");
 });
 client.on('guildMemberRemove', member =>
 {
     let guild = member.guild;
-    guild.channels.get('296718956545441794').sendMessage('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
+    guild.channels.get('296718956545441794').send('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
 });
 
 
@@ -42,7 +42,7 @@ client.on('guildMemberRemove', member =>
 client.on('message', message =>
 {
     //TESTING INIT
-    if (message.channel.type == "dm")
+    if (message.channel.type == "dm" && message.author.id != "301176884438368257")
     {
         message.channel.sendMessage("I hear you");
     }
@@ -59,7 +59,7 @@ client.on('message', message =>
         //Bot informs member of its status
         if (message.content.toLowerCase().toString().includes('status'))
         {
-            message.channel.sendMessage('I am learning how to initialize new members, ' + trump(message.member.displayName, " [") + "\nI am also working to find a way to stcok fireteams, to make it easier for you to plan upcoming games.");
+            message.channel.send('I am learning how to initialize new members, ' + trump(message.member.displayName, " [") + "\nI am also working on a way to stock fireteams, to make it easier for you to plan upcoming games.");
         }
 
         //Bot does research in ishtar database
@@ -68,20 +68,20 @@ client.on('message', message =>
             argString = arguments(message.content.toLowerCase().toString());
             if (argString.length === 0)
             {
-                message.channel.sendMessage('I need some keywords to find lore entries Guardian. Please include `"keywords"` in your command.');
+                message.channel.send('I need some keywords to find lore entries Guardian. Please include `"keywords"` in your command.');
             }
             else
             {
                 args = argString.split(" ");
                 var keywords = args.length + 1;
-                message.channel.sendMessage("I was given " + (keywords - 1) + " keywords. Here is what I found :");
+                message.channel.send("I was given " + (keywords - 1) + " keywords. Here is what I found :");
                 var search = '';
                 while (keywords > 1)
                 {
                     search += args[args.length - keywords + 1] + "-";
                     keywords -= 1;
                 }
-                message.channel.sendMessage('http://www.ishtar-collective.net/categories/' + search.substring(0, search.length - 1));
+                message.channel.send('http://www.ishtar-collective.net/categories/' + search.substring(0, search.length - 1));
             }
         }
 
@@ -95,7 +95,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.sendMessage('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -111,24 +111,24 @@ client.on('message', message =>
                     //TEST
                     /*if (planned_ops == null)
                     {
-                        planned_ops = message.member.guild.channels.get('315332691576750080').sendMessage(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n').id;
+                        planned_ops = message.member.guild.channels.get('315332691576750080').send(fireteamName + ".txt" + ' \n' + message.member.displayName.toString() + ' \n').id;
                     }
                     else
                     {
                         message.planned_ops.edit("Is it working ?");
                     }*/
                     plannedOperations('334875452554608640', "Edited that fucker");
-                    message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
+                    message.channel.send('The fireteam "' + fireteamName + '" has been created !');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
                         if (err)
                         {
-                            message.channel.sendMessage('Hum... Not sure what happened, but I was not able to create your fireteam...')
+                            message.channel.send('Hum... Not sure what happened, but I was not able to create your fireteam...')
                         }
                         else
                         {
-                            message.channel.sendMessage('Your fireteam "' + fireteamName + '" has been created !');
+                            message.channel.send('Your fireteam "' + fireteamName + '" has been created !');
                         }
                     });*/
                 }
@@ -138,7 +138,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.sendMessage('You need a fireteam to join a fireteam. Please include `join, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('You need a fireteam to join a fireteam. Please include `join, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -156,19 +156,19 @@ client.on('message', message =>
                         {
                             if (err)
                             {
-                                message.channel.sendMessage('Something went wrong...')
+                                message.channel.send('Something went wrong...')
                             }
                             if (data.indexOf(message.member.displayName.toString()) >= 0)
                             {
-                                message.channel.sendMessage('Looks like you already joined that fireteam, here is the current roster :')
+                                message.channel.send('Looks like you already joined that fireteam, here is the current roster :')
                                 fs.readFile("fireteams/-" + fireteamName + ".txt", 'utf8', function (err, data)
                                 {
                                     if (err)
                                     {
-                                        message.channel.sendMessage('Hum... well I think you joined but I cannot find it... weird.')
+                                        message.channel.send('Hum... well I think you joined but I cannot find it... weird.')
                                     }
-                                    message.channel.sendMessage(data);
-                                    message.channel.sendMessage('Anyway, I will not tell the others that you had forgotten about it, do not worry.')
+                                    message.channel.send(data);
+                                    message.channel.send('Anyway, I will not tell the others that you had forgotten about it, do not worry.')
                                 });
                             }
                             else
@@ -177,16 +177,16 @@ client.on('message', message =>
                                 {
                                     if (err)
                                     {
-                                        message.channel.sendMessage('Hum... I could not add you to the fireteam...')
+                                        message.channel.send('Hum... I could not add you to the fireteam...')
                                     }
-                                    message.channel.sendMessage('You joined "' + fireteamName + '" !');
+                                    message.channel.send('You joined "' + fireteamName + '" !');
                                 });
                             }
                         });
                     }
                     else
                     {
-                        message.channel.sendMessage('Hum... I was not able to find your fireteam...')
+                        message.channel.send('Hum... I was not able to find your fireteam...')
                     }
                 }
             }
@@ -195,7 +195,7 @@ client.on('message', message =>
             {
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0) {
-                    message.channel.sendMessage('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your command.');
                 }
                 else
                 {
@@ -211,23 +211,23 @@ client.on('message', message =>
                     if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
                     {
                         fs.unlink("fireteams/-" + fireteamName + ".txt")
-                        message.channel.sendMessage('Your fireteam "' + fireteamName + '" has been deleted !');
+                        message.channel.send('Your fireteam "' + fireteamName + '" has been deleted !');
                     }
                     else
                     {
-                        message.channel.sendMessage('Did you just tell me to delete a fireteam that does not exist ?')
+                        message.channel.send('Did you just tell me to delete a fireteam that does not exist ?')
                     }
                 }
             }
             //SHOW ALL FIRETEAMS
             else if (message.content.toLowerCase().toString().includes('list'))
             {
-                message.channel.sendMessage('The list command is not ready yet...')
+                message.channel.send('The list command is not ready yet...')
             }
             //UNCOMPLETE COMMAND
             else
             {
-                message.channel.sendMessage('Did you say something guardian ? Add `new`, `join`, `delete` or `show` to your fireteams commands.')
+                message.channel.send('Did you say something guardian ? Add `new`, `join`, `delete` or `show` to your fireteams commands.')
             }
         }
 
@@ -260,13 +260,13 @@ client.on('message', message =>
                 "How does Oryx measure his ships' speed ? \nIn Dreadknots"
                 ];
             i = Math.floor(Math.random() * (jokes.length));
-            message.channel.sendMessage(jokes[i]);
+            message.channel.send(jokes[i]);
         }
 
         //Bot is mentionned but no command is given
         else
         {
-            message.channel.sendMessage('How can I help you, ' + trump(message.member.displayName, " ["));
+            message.channel.send('How can I help you, ' + trump(message.member.displayName, " ["));
         }
     }
 });
