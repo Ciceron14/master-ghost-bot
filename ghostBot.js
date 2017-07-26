@@ -32,7 +32,7 @@ client.on('guildMemberAdd', member =>
     guild.channels.get('296718956545441794').send("I'm receiving signals... I think it's a guardian !");
     guild.channels.get('296718956545441794').send("I'll try to initialize them");
 
-    initializing.push([member.id, 0]);
+    initializing.push([member.id, 1]);
     member.sendMessage("Guardian ? This is the Conglomerate's frequency. Your signal is very weak...");
     member.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
 });
@@ -40,7 +40,7 @@ client.on('guildMemberAdd', member =>
 client.on('guildMemberRemove', member =>
 {
     let guild = member.guild;
-    guild.channels.get('296718956545441794').send('Guardian down ! ' + member.user + ' left the Conglomerate.' + System.lineSeparator() + 'Only ' + (guild.memberCount - 1) + " guardians left.");
+    guild.channels.get('296718956545441794').send('Guardian down ! ' + member.user + ' left the Conglomerate.\nOnly ' + (guild.memberCount - 1) + " guardians left.");
 });
 
 
