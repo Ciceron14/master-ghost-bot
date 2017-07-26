@@ -49,7 +49,8 @@ client.on('message', message =>
 {
     if (message.channel.id == "315561936668590081")
     {
-        if (client.guilds.get("292076742355451904").members.get(message.author.id).roles.indexOf("339897537584693258") == -1)
+        var rolesList = [].concat.apply([], client.guilds.get("292076742355451904").members.get(message.author.id).roles)
+        if (rolesList.indexOf("339897537584693258") == -1)
         {
             message.delete();
         }
