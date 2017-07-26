@@ -49,14 +49,16 @@ client.on('message', message =>
 {
     if (message.channel.id == "315561936668590081")
     {
+        client.guilds.get("292076742355451904").members.get(message.author.id).hoistRole
         var rolesList = [].concat.apply([], client.guilds.get("292076742355451904").members.get(message.author.id).roles)
-        if (rolesList.indexOf("339897537584693258") == -1)
+        if (rolesList.indexOf("339897537584693258") != -1)
         {
-            message.delete();
+            client.guilds.get("292076742355451904").members.get(message.author.id).removeRole("339897537584693258");
         }
         else
         {
-           client.guilds.get("292076742355451904").members.get(message.author.id).removeRole("339897537584693258");
+            message.delete();
+            message.author.sendMessage("Wait until you have a new meme available, check your roles");
         }
     }
     //TESTING INIT
