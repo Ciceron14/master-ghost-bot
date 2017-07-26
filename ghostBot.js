@@ -54,7 +54,7 @@ client.on('message', message =>
                 message.channel.sendMessage("You need to be initialized");
                 initializing[col/2][1] += 1;
             }
-            if (initializing[col/2][1] == 1)
+            else if (initializing[col/2][1] == 1)
             {
                 message.channel.sendMessage("dude chill");
                 initializing.splice(col/2, 1);
