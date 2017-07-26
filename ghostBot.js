@@ -51,13 +51,27 @@ client.on('message', message =>
         {
             if (initializing[col/2][1] == 0)
             {
-                message.channel.sendMessage("You need to be initialized");
+                message.channel.sendMessage("Guardian ? This is the Conglomerate<s frequency. Your signal is very week...");
+                message.channel.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
                 initializing[col/2][1] += 1;
             }
             else if (initializing[col/2][1] == 1)
             {
-                message.channel.sendMessage("dude chill");
-                initializing.splice(col/2, 1);
+                if (message.content.toLowerCase().toString() == "yes")
+                {
+                    message.channel.sendMessage("Awesome !");
+                    initializing.splice(col/2, 1);
+                }
+                else if (message.content.toLowerCase().toString() == "no")
+                {
+                    message.channel.sendMessage("Wait... but then... how did you answer me ?");
+                    message.channel.sendMessage("Come on you can do it, type `yes` if you copy");
+                }
+                else
+                {
+                    message.channel.sendMessage("I can't make sense of your signal Guardian.");
+                    message.channel.sendMessage("Do you copy ? Please type `yes` if you do");
+                }
             }
         }
         else
@@ -87,7 +101,7 @@ client.on('message', message =>
             argString = arguments(message.content.toLowerCase().toString());
             if (argString.length === 0)
             {
-                message.channel.send('I need some keywords to find lore entries Guardian. Please include `"keywords"` in your command.');
+                message.channel.send('I need some keywords to find lore entries Guardian. Please include `"keywords"` in your request.');
             }
             else
             {
@@ -114,7 +128,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.send('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your request.');
                 }
                 else
                 {
@@ -157,7 +171,7 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.send('You need a fireteam to join a fireteam. Please include `join, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('You need a fireteam to join a fireteam. Please include `join, fireteam, "fireteam name"` in your request.');
                 }
                 else
                 {
@@ -214,7 +228,7 @@ client.on('message', message =>
             {
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0) {
-                    message.channel.send('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your command.');
+                    message.channel.send('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your request.');
                 }
                 else
                 {
@@ -238,15 +252,10 @@ client.on('message', message =>
                     }
                 }
             }
-            //SHOW ALL FIRETEAMS
-            else if (message.content.toLowerCase().toString().includes('list'))
-            {
-                message.channel.send('The list command is not ready yet...')
-            }
             //UNCOMPLETE COMMAND
             else
             {
-                message.channel.send('Did you say something guardian ? Add `new`, `join`, `delete` or `show` to your fireteams commands.')
+                message.channel.send('Did you say something guardian ? Add `new`, `join`, `delete` or `show` to your fireteams request.')
             }
         }
 
