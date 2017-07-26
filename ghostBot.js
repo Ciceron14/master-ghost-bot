@@ -50,11 +50,15 @@ client.on('message', message =>
         if (col != -1) // found
         {
             if (initializing[col/2][1] == 0)
+            {
                 message.channel.sendMessage("You need to be initialized");
-                if (initializing[col/2][1] == 1)
-            message.channel.sendMessage("dude chill");
-                if (initializing[col/2][1] == 2)
-            message.channel.sendMessage("lol tf");
+                initializing[col/2][1] += 1;
+            }
+            if (initializing[col/2][1] == 1)
+            {
+                message.channel.sendMessage("dude chill");
+                initializing.splice(col/2, 1);
+            }
         }
         else
         {
