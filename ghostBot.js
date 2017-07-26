@@ -30,7 +30,12 @@ client.on('guildMemberAdd', member =>
     let guild = member.guild;
     guild.channels.get('296718956545441794').send("I'm receiving signals... I think it's a guardian !");
     guild.channels.get('296718956545441794').send("I'll try to initialize them");
+
+    initializing.push([member.id, 0]);
+    member.sendMessage("Guardian ? This is the Conglomerate's frequency. Your signal is very weak...");
+    member.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
 });
+
 client.on('guildMemberRemove', member =>
 {
     let guild = member.guild;
@@ -49,14 +54,7 @@ client.on('message', message =>
         var row = -1;
         if (col != -1) // found
         {
-            if (initializing[col/2][1] == 0) //INTRO
-            {
-                message.channel.sendMessage("Guardian ? This is the Conglomerate<s frequency. Your signal is very week...");
-                message.channel.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
-                initializing[col/2][1] += 1;
-            }
-
-            else if (initializing[col/2][1] == 1) //FIRST CONTACT + ASK FOR NAME
+            if (initializing[col/2][1] == 1) //FIRST CONTACT + ASK FOR NAME
             {
                 if (message.content.toLowerCase().toString() == "yes")
                 {
@@ -78,7 +76,7 @@ client.on('message', message =>
 
             else if (initializing[col/2][1] == 2) //RECEIVE NAME + ASK FOR CLAN OR ALLY
             {
-                if (message.content.toLowerCase().toString().includes == " [" && message.content.toLowerCase().toString().includes == "]" && message.content.toString().length >= 7)
+                if ((message.content.toLowerCase().toString().includes == " [") && (message.content.toLowerCase().toString().includes == "]") && message.content.toString().length >= 7)
                 {
                     message.channel.sendMessage("Got it. I'm entering it in the database.");
                     message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
@@ -128,8 +126,9 @@ client.on('message', message =>
         //TESTING INIT
         if (message.content.toLowerCase().toString().includes('initialize'))
         {
-            initializing.push([message.author.id, 0]);
-            message.author.sendMessage('Does this work ?');
+            initializing.push([message.author.id, 1]);
+            message.author.sendMessage("Guardian ? This is the Conglomerate<s frequency. Your signal is very week...");
+            message.author.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
         }
 
         //Bot informs member of its status
