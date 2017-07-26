@@ -76,7 +76,7 @@ client.on('message', message =>
 
             else if (initializing[col/2][1] == 2) //RECEIVE NAME + ASK FOR CLAN OR ALLY
             {
-                if ((message.content.toString().includes == " [") && (message.content.toString().includes == "]"))
+                if (message.content.toString().includes(" [") && message.content.toString().includes("]") && message.content.toString().length >= 7)
                 {
                     message.channel.sendMessage("Got it. I'm entering it in the database.");
                     message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
@@ -91,18 +91,18 @@ client.on('message', message =>
 
             else if (initializing[col/2][1] == 3) //RECEIVE CLAN OR ALLY + END
             {
-                if (message.content.toLowerCase().toString().includes == "clan" && (message.content.toLowerCase().toString().includes == "ally" || message.content.toLowerCase().toString().includes == "solo"))
+                if (message.content.toLowerCase().toString().includes("clan") && (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo")))
                 {
                     message.channel.sendMessage("You signal is weak Guardian... all your keywords are getting mixed up togeter...");
                     message.channel.sendMessage("try to type `clan` or `ally` depending on why you contacted us !");
                 }
-                else if (message.content.toLowerCase().toString().includes == "clan")
+                else if (message.content.toLowerCase().toString().includes("clan"))
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
                     initializing.splice(col/2, 1);
                 }
-                else if (message.content.toLowerCase().toString().includes == "ally" || message.content.toLowerCase().toString().includes == "solo")
+                else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
@@ -127,7 +127,7 @@ client.on('message', message =>
         if (message.content.toLowerCase().toString().includes('initialize'))
         {
             initializing.push([message.author.id, 1]);
-            message.author.sendMessage("Guardian ? This is the Conglomerate<s frequency. Your signal is very week...");
+            message.author.sendMessage("Guardian ? This is the Conglomerate's frequency. Your signal is very weak...");
             message.author.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
         }
 
