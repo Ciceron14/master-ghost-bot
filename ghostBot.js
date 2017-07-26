@@ -44,7 +44,17 @@ client.on('message', message =>
     //TESTING INIT
     if (message.channel.type == "dm" && message.author.id != "301176884438368257")
     {
-        message.channel.sendMessage("I hear you");
+        var flat = [].concat.apply([], initializing);
+        var col = flat.indexOf(message.author.id);
+        var row = -1;
+        if (col != -1) // found
+        {
+            message.channel.sendMessage("You need to be initialized");
+        }
+        else
+        {
+            message.channel.sendMessage("yeah k");
+        }
     }
 
     if (message.isMentioned("301176884438368257"))
@@ -57,7 +67,7 @@ client.on('message', message =>
         }
 
         //Bot informs member of its status
-        if (message.content.toLowerCase().toString().includes('status'))
+        else if (message.content.toLowerCase().toString().includes('status'))
         {
             message.channel.send('I am learning how to initialize new members, ' + trump(message.member.displayName, " [") + "\nI am also working on a way to stock fireteams, to make it easier for you to plan upcoming games.");
         }
