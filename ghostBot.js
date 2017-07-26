@@ -49,18 +49,20 @@ client.on('message', message =>
         var row = -1;
         if (col != -1) // found
         {
-            if (initializing[col/2][1] == 0)
+            if (initializing[col/2][1] == 0) //INTRO
             {
                 message.channel.sendMessage("Guardian ? This is the Conglomerate<s frequency. Your signal is very week...");
                 message.channel.sendMessage("Guardian, do you copy ? Type `yes` if you can hear me. Type `no` if you can't... if that makes sense ?");
                 initializing[col/2][1] += 1;
             }
-            else if (initializing[col/2][1] == 1)
+
+            else if (initializing[col/2][1] == 1) //FIRST CONTACT + ASK FOR NAME
             {
                 if (message.content.toLowerCase().toString() == "yes")
                 {
-                    message.channel.sendMessage("Awesome !");
-                    initializing.splice(col/2, 1);
+                    message.channel.sendMessage("Awesome ! Guardian, I need to know your PSN ID and how you want to be called by the members of the Conglomerate.");
+                    message.channel.sendMessage("Please, type them like this: `NAME [PSN ID]`... Do not type anything else !");
+                    initializing[col/2][1] += 1;
                 }
                 else if (message.content.toLowerCase().toString() == "no")
                 {
@@ -73,10 +75,51 @@ client.on('message', message =>
                     message.channel.sendMessage("Do you copy ? Please type `yes` if you do");
                 }
             }
+
+            else if (initializing[col/2][1] == 2) //RECEIVE NAME + ASK FOR CLAN OR ALLY
+            {
+                if (message.content.toLowerCase().toString().includes == "[" && message.content.toLowerCase().toString().includes == "]" && message.length > 6)
+                {
+                    message.channel.sendMessage("Got it. I'm entering it in the database.");
+                    message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
+                    initializing[col/2][1] += 1;
+                }
+                else
+                {
+                    message.channel.sendMessage("Wait... that doesn't sound right...");
+                    message.channel.sendMessage("Please, type them exactly like this: `NAME [PSN ID]`...");
+                }
+            }
+
+            else if (initializing[col/2][1] == 3) //RECEIVE CLAN OR ALLY + END
+            {
+                if (message.content.toLowerCase().toString().includes == "clan" && (message.content.toLowerCase().toString().includes == "ally" || message.content.toLowerCase().toString().includes == "solo"))
+                {
+                    message.channel.sendMessage("You signal is weak Guardian... all your keywords are getting mixed up togeter...");
+                    message.channel.sendMessage("try to type `clan` or `ally` depending on why you contacted us !");
+                }
+                else if (message.content.toLowerCase().toString().includes == "clan")
+                {
+                    message.channel.sendMessage("Sweet ! I will let the command know !");
+                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
+                    initializing.splice(col/2, 1);
+                }
+                else if (message.content.toLowerCase().toString().includes == "ally" || message.content.toLowerCase().toString().includes == "solo")
+                {
+                    message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
+                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
+                    initializing.splice(col/2, 1);
+                }
+                else
+                {
+                    message.channel.sendMessage("You signal is weak Guardian... I need keywords so I can make sure I understand...");
+                    message.channel.sendMessage("try to type `clan` or `ally` depending on why you contacted us !");
+                }
+            }
         }
         else
         {
-            message.channel.sendMessage("yeah k");
+            message.channel.sendMessage("What is up Guardian ? Just kidding, I don't understand anything you just said.");
         }
     }
 
