@@ -47,6 +47,13 @@ client.on('guildMemberRemove', member =>
 //REACT TO MESSAGES IN CHANNEL
 client.on('message', message =>
 {
+    if (message.channel.id == "315561936668590081")
+    {
+        if (message.author.roles.indexOf("339897537584693258") == -1)
+        {
+            message.delete();
+        }
+    }
     //TESTING INIT
     if (message.channel.type == "dm" && message.author.id != "301176884438368257")
     {
@@ -128,7 +135,7 @@ client.on('message', message =>
         }
         else
         {
-            message.channel.sendMessage("What is up Guardian ? Just kidding, I don't understand anything you just said.");
+            message.channel.sendMessage("What is up Guardian ?");
         }
     }
 
