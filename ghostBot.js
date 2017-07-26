@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 var fs = require('fs');
 
+var initializing = [];
+
 function arguments(str)
 {
     var start_pos = str.indexOf('"') + 1;
@@ -10,14 +12,12 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
-
 function plannedOperations(ID, str)
 {
     client.channels.get('315332691576750080').fetchMessage(ID)
         .then(message => message.edit(message.content + str))
         .catch(console.error);
 }
-
 
 client.on('ready', () =>
 {
@@ -41,17 +41,25 @@ client.on('guildMemberRemove', member =>
 //REACT TO MESSAGES IN CHANNEL
 client.on('message', message =>
 {
-    if (message.channel.id == message.member.guild.channels.get('315332691576750080'))
+    //TESTING INIT
+    if (message.channel.type == "dm")
     {
-        plannedOperations(message, "add stuff plz")
+        message.channel.sendMessage("I hear you");
     }
 
     if (message.isMentioned("301176884438368257"))
     {
+        //TESTING INIT
+        if (message.content.toLowerCase().toString().includes('initialize'))
+        {
+            initializing.push([message.author.id, 0]);
+            message.author.sendMessage('Does this work ?');
+        }
+
         //Bot informs member of its status
         if (message.content.toLowerCase().toString().includes('status'))
         {
-            message.channel.sendMessage('I can run some basic search on the Ishtar database now, ' + trump(message.member.displayName, " ["));
+            message.channel.sendMessage('I am learning how to initialize new members, ' + trump(message.member.displayName, " [") + "\nI am also working to find a way to stcok fireteams, to make it easier for you to plan upcoming games.");
         }
 
         //Bot does research in ishtar database
@@ -111,7 +119,6 @@ client.on('message', message =>
                     }*/
                     plannedOperations('334875452554608640', "Edited that fucker");
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
-                    message.author.sendMessage('Does this work ?');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
