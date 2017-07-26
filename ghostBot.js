@@ -102,15 +102,15 @@ client.on('message', message =>
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("<@&328988528543531021>");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("328988528543531021");
                     initializing.splice(col/2, 1);
                 }
                 else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("<@&300841294010253312>");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("300841294010253312");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("<@&328988528543531021>");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("328988528543531021");
                     initializing.splice(col/2, 1);
                 }
                 else
