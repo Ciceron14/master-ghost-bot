@@ -119,6 +119,12 @@ client.on('message', message =>
                     message.channel.sendMessage("Try to type `clan` or `ally` depending on why you contacted us !");
                 }
             }
+
+            else 
+            {
+                message.channel.sendMessage("Ah... Something went wrong... please contact the Command.");
+                initializing.splice(col/2, 1);
+            }
         }
         else
         {
