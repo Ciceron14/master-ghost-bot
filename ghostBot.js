@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var fs = require('fs');
-//var nf = require('node-fetch');
+var mysql = require('mysql');
 
 function arguments(str)
 {
@@ -12,7 +12,6 @@ function arguments(str)
 }
 
 
-//fuck this
 function plannedOperations(ID, str)
 {
     client.channels.get('315332691576750080').fetchMessage(ID)
@@ -30,7 +29,8 @@ client.on('ready', () =>
 client.on('guildMemberAdd', member =>
 {
     let guild = member.guild;
-    guild.channels.get('296718956545441794').sendMessage('A new guardian has joined. Welcome, ' + member.user + ' !' + System.lineSeparator() + "Don't forget to read the #open_broadcast !");
+    guild.channels.get('296718956545441794').sendMessage("I'm receiving signals... I think it's a guardian !");
+    guild.channels.get('296718956545441794').sendMessage("I'll try to initialize them");
 });
 client.on('guildMemberRemove', member =>
 {
@@ -46,7 +46,7 @@ client.on('message', message =>
     {
         plannedOperations(message, "add stuff plz")
     }
-    //if (message.content.toString().includes('Ghost'))
+
     if (message.isMentioned("301176884438368257"))
     {
         //Bot informs member of its status
@@ -111,13 +111,8 @@ client.on('message', message =>
                         message.planned_ops.edit("Is it working ?");
                     }*/
                     plannedOperations('334875452554608640', "Edited that fucker");
-                    /*for (var [ID, plan] of Array.from(OG)) 
-                    {
-                        plan.edit("Edited that fucker");
-                        console.log(plan.toString);
-                        console.log(ID);
-                    }*/
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
+                    message.author.sendMessage('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
@@ -189,43 +184,6 @@ client.on('message', message =>
                     }
                 }
             }
-            /*//SHOW
-            else if (message.content.toLowerCase().toString().includes('show'))
-            {
-                argString = arguments(message.content.toLowerCase().toString());
-                if (argString.length <= 0)
-                {
-                    message.channel.sendMessage('I need a fireteam name to be able to show the people who joined it. Please include `show, fireteam, "fireteam name"` in your command.');
-                }
-                else
-                {
-                    args = argString.split(" ");
-                    var keywords = args.length + 1;
-                    var fireteamName = '';
-                    while (keywords > 1)
-                    {
-                        fireteamName += args[args.length - keywords + 1] + " ";
-                        keywords -= 1;
-                    }
-                    fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
-                    {
-                        fs.readFile("fireteams/-" + fireteamName + ".txt", 'utf8', function (err, data)
-                        {
-                            if (err)
-                            {
-                                message.channel.sendMessage('Hum... I could not read the fireteam roster...')
-                            }
-                            message.channel.sendMessage('Here is the current roster for "' + fireteamName + '":');
-                            message.channel.sendMessage(data);
-                        });
-                    }
-                    else
-                    {
-                        message.channel.sendMessage('Did you just tell me to find a fireteam that does not exist ?')
-                    }
-                }
-            }*/
             //DELETE
             else if (message.content.toLowerCase().toString().includes('delete'))
             {
