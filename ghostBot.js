@@ -101,7 +101,7 @@ client.on('message', message =>
                 else if (message.content.toLowerCase().toString().includes("clan"))
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
-                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
+                    message.channel.sendMessage("Well, you're all set. I opened up the public channel, contact the Command to join the clan !");
                     client.guilds.get("292076742355451904").members.get(message.author.id).addRole("328988528543531021");
                     initializing.splice(col/2, 1);
                 }
