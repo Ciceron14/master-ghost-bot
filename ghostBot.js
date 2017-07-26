@@ -112,7 +112,7 @@ client.on('message', message =>
                     }*/
                     plannedOperations('334875452554608640', "Edited that fucker");
                     message.channel.sendMessage('The fireteam "' + fireteamName + '" has been created !');
-                    message.author.sendMessage('I need a fireteam name Guardian. Please include `new, fireteam, "fireteam name"` in your command.');
+                    message.author.sendMessage('Does this work ?');
                     
                     /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
                     {
