@@ -4,6 +4,7 @@ const client = new Discord.Client();
 var fs = require('fs');
 
 var initializing = [];
+var guildID = "292076742355451904"
 
 function arguments(str)
 {
@@ -79,6 +80,7 @@ client.on('message', message =>
                 if (message.content.toString().includes(" [") && message.content.toString().includes("]") && message.content.toString().length >= 7)
                 {
                     message.channel.sendMessage("Got it. I'm entering it in the database.");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).setNickname(message.content.toString());
                     message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
                     initializing[col/2][1] += 1;
                 }
@@ -94,24 +96,27 @@ client.on('message', message =>
                 if (message.content.toLowerCase().toString().includes("clan") && (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo")))
                 {
                     message.channel.sendMessage("You signal is weak Guardian... all your keywords are getting mixed up togeter...");
-                    message.channel.sendMessage("try to type `clan` or `ally` depending on why you contacted us !");
+                    message.channel.sendMessage("Try to type `clan` or `ally` depending on why you contacted us !");
                 }
                 else if (message.content.toLowerCase().toString().includes("clan"))
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("Initialized");
                     initializing.splice(col/2, 1);
                 }
                 else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("Allies");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
+                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("Initialized");
                     initializing.splice(col/2, 1);
                 }
                 else
                 {
                     message.channel.sendMessage("You signal is weak Guardian... I need keywords so I can make sure I understand...");
-                    message.channel.sendMessage("try to type `clan` or `ally` depending on why you contacted us !");
+                    message.channel.sendMessage("Try to type `clan` or `ally` depending on why you contacted us !");
                 }
             }
         }
