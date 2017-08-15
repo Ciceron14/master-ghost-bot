@@ -252,7 +252,7 @@ client.on('message', message =>
         }
         else if(message.content.toLowerCase().toString().includes("add"))
         {
-            if (addUser(client.guilds.get(guildID).members.get(message.author.id).displayName) == true)
+            if (addUser(message.author.id, client.guilds.get(guildID).members.get(message.author.id).displayName) == true)
                 message.channel.sendMessage("Added you to the database" + users_info.toString());
             else
                 message.channel.sendMessage("You're already in the database" + users_info.toString())
