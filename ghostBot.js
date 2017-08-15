@@ -26,8 +26,18 @@ var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
-var users_info = [{id: "1", name: "1", psn: "1"}];
-
+//var users_info = [{id: "1", name: "1", psn: "1"}];
+fs.readFile(("data/users_info.json"), function (err, data)
+{
+    if (err)
+    {
+        message.channel.send('Something went wrong...');
+    }
+    else
+    {
+        users_info = JSON.stringify(eval("(" + data + ")"));
+    }
+});
 
 
 
