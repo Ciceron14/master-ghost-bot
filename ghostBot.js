@@ -26,7 +26,7 @@ var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
-var users_info = [{id: 1, name: 1, psn: 1}];
+var users_info = [{id: "1", name: "1", psn: "1"}];
 
 
 
@@ -34,7 +34,8 @@ var users_info = [{id: 1, name: 1, psn: 1}];
 //FUNCTIONS
 function addUser(memberid, name)
 {
-    if (users_info.hasOwnProperty(id))
+    //if (users_info.hasOwnProperty(id))
+    if (users_info.filter(function (user) { return user.id == memberid}).length != 0)
     {
         return(false);
     }
