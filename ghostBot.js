@@ -20,9 +20,34 @@ var test_channelID ="301180453883478016";
 //Roles
 var meme_available = "339897537584693258";
 
+//Stuff
+var stuff1 = 'MzAxMTc2ODg0NDM4MzY4MjU3';
+var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
+var stuff3 = '.DHPAZA.74_';
+
+//Saved Data
+var users_info ={
+   id: [{name, psn}],
+};
+
+
 
 
 //FUNCTIONS
+function addUser(memberid, name)
+{
+    if (users_info.hasOwnProperty(id))
+    {
+        return(false);
+    }
+    else
+    {
+        users_info.push(memberid);
+        users_info.memberid.push(realName(name), psnID(name));
+        return(true);
+    }
+}
+
 function realName(str)
 {
     var pattern = " [";
@@ -238,6 +263,13 @@ client.on('message', message =>
                 initializing.splice(col/2, 1);
             }
         }
+        else if(message.content.toLowerCase().toString().includes("add"))
+        {
+            if (addUser(message.member.displayName) == true)
+                message.channel.sendMessage("Added you to the database");
+            else
+                message.channel.sendMessage("You're already in the database")
+        }
         else
         {
             message.channel.sendMessage("What is up Guardian ?");
@@ -441,7 +473,7 @@ client.on('message', message =>
         //Bot is mentionned but no command is given
         else
         {
-            message.channel.send('How can I help you, ' + realName(message.member.displayName));
+            message.channel.send('How can I help you, ' + realName(message.member.id, message.member.displayName));
         }
     }
 });
@@ -454,4 +486,4 @@ client.on('message', message =>
 
 //add bot to server = https://discordapp.com/oauth2/authorize?client_id=301176884438368257&scope=bot
 //bot client id = 301176884438368257
-client.login('MzAxMTc2ODg0NDM4MzY4MjU3.C83MZQ.CmryEmXsikHsgUFvICqKZqBSxIg');
+client.login(stuff1 + stuff3 + stuff2);
