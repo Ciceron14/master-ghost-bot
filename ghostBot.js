@@ -131,7 +131,7 @@ client.on('message', message =>
     if (message.channel.id == space_nonsenseID)
     {
         client.guilds.get(guildID).members.get(message.author.id).hoistRole
-        //var rolesList = [].concat.apply([], client.guilds.get("292076742355451904").members.get(message.author.id).roles)
+        //var rolesList = [].concat.apply([], client.guilds.get("guildID").members.get(message.author.id).roles)
         if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
         {
             client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
@@ -215,7 +215,7 @@ client.on('message', message =>
                 if (message.content.toString().includes(" [") && message.content.toString().includes("]") && message.content.toString().length >= 7)
                 {
                     message.channel.sendMessage("Got it. I'm entering it in the database.");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).setNickname(message.content.toString());
+                    client.guilds.get(guildID).members.get(message.author.id).setNickname(message.content.toString());
                     message.channel.sendMessage("Why did you contact us ? Do you want to join our clan or do you just come as an ally from another clan / solo player ?");
                     initializing[col/2][1] += 1;
                 }
@@ -237,15 +237,15 @@ client.on('message', message =>
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
                     message.channel.sendMessage("Well, you're all set. I opened up the public channel, contact the Command to join the clan !");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("328988528543531021");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole("328988528543531021");
                     initializing.splice(col/2, 1);
                 }
                 else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("300841294010253312");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole("300841294010253312");
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
-                    client.guilds.get("292076742355451904").members.get(message.author.id).addRole("328988528543531021");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole("328988528543531021");
                     initializing.splice(col/2, 1);
                 }
                 else
@@ -263,7 +263,7 @@ client.on('message', message =>
         }
         else if(message.content.toLowerCase().toString().includes("add"))
         {
-            if (addUser(message.member.displayName) == true)
+            if (addUser(client.guilds.get(guildID).members.get(message.author.id).displayName) == true)
                 message.channel.sendMessage("Added you to the database" + users_info.toString());
             else
                 message.channel.sendMessage("You're already in the database" + users_info.toString())
