@@ -49,21 +49,9 @@ function addUser(memberid, name)
 
 function realName(str)
 {
-    var pattern = " [";
-    if (str && str.length)
-    {
-        trumped = str;
-        if (pattern && pattern.length)
-        {
-            var idx = str.indexOf(pattern);
-
-            if (idx != -1)
-            {
-                trumped = str.substring(0, idx);
-            }
-        }
-    }
-    return (trumped);
+    var start_pos = 0;
+    var end_pos = str.indexOf(' [', start_pos);
+    return str.substring(start_pos, end_pos);
 }
 
 function psnID(str)
