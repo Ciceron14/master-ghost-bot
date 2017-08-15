@@ -44,14 +44,23 @@ fs.readFile(("data/users_info.json"), function (err, data)
 //FUNCTIONS
 function addUser(memberid, name)
 {
-    //if (users_info.hasOwnProperty(id))
-    if (users_info.filter(function (user) { return user.id == memberid}).length != 0)
+    var results = [];
+    var searchField = "id";
+    var searchVal = memberid;
+    for (var i=0 ; i < obj.users_info.length ; i++)
+    {
+        if (obj.users_info[i][searchField] == searchVal) {
+            results.push(obj.users_info[i]);
+        }
+    }
+    //if (users_info.filter(function (user) { return user.id == memberid}).length != 0)\
+    if(results.length != 0)
     {
         return(false);
     }
     else
     {
-        users_info.push({id: memberid, name: realName(name), psn: psnID(name)});
+        obj.users_info.push({"id": memberid, "name": realName(name), "psn": psnID(name)});
         return(true);
     }
 }
