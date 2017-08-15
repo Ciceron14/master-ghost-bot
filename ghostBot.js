@@ -482,7 +482,7 @@ client.on('message', message =>
 
 
 
-
+//
 
 //add bot to server = https://discordapp.com/oauth2/authorize?client_id=301176884438368257&scope=bot
 //bot client id = 301176884438368257
