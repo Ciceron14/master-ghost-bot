@@ -26,9 +26,7 @@ var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
-var users_info ={
-   id: [{name: string, psn: string}],
-};
+var users_info = [{id: 1, name: 1, psn: 1}];
 
 
 
@@ -42,7 +40,7 @@ function addUser(memberid, name)
     }
     else
     {
-        users_info.push(memberid);
+        users_info.push({id: memberid, name: realName(name), psn: psnID(name)});
         users_info.memberid.push(realName(name), psnID(name));
         return(true);
     }
@@ -266,9 +264,9 @@ client.on('message', message =>
         else if(message.content.toLowerCase().toString().includes("add"))
         {
             if (addUser(message.member.displayName) == true)
-                message.channel.sendMessage("Added you to the database");
+                message.channel.sendMessage("Added you to the database" + users_info.toString());
             else
-                message.channel.sendMessage("You're already in the database")
+                message.channel.sendMessage("You're already in the database" + users_info.toString())
         }
         else
         {
