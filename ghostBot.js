@@ -42,7 +42,6 @@ function addUser(memberid, name)
     else
     {
         users_info.push({id: memberid, name: realName(name), psn: psnID(name)});
-        users_info.memberid.push(realName(name), psnID(name));
         return(true);
     }
 }
