@@ -26,8 +26,8 @@ var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
-var users_data = fs.readFileSync("data/users_info.json");
-var users_info = JSON.parse(users_data);
+//var users_data = fs.readFileSync("./data/users_info.json");
+var users_info = JSON.parse(fs.readFileSync("data/users_info.json", 'utf8'));
 
 
 
