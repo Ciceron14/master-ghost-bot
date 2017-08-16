@@ -26,22 +26,24 @@ var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
-//var users_info = [{id: "1", name: "1", psn: "1"}];
-fs.readFile(("data/users_info.json"), function (err, data)
-{
-    if (err)
-    {
-        message.channel.send('Something went wrong...');
-    }
-    else
-    {
-        users_info = JSON.stringify(eval("(" + data + ")"));
-    }
-});
+var users_data = fs.readFileSync("data/users_info.json");
+var users_info = JSON.parse(users_data);
 
 
 
 //FUNCTIONS
+function saveData(filePath, dataToSave)
+{
+    var strData = JSON.stringify(dataToSave, null, 2);
+    fs.writeFile(filePath, strData, finished);
+
+    function finished(err)
+    {
+        console.log('saved new data');
+    }
+}
+
+
 function addUser(memberid, name)
 {
     var results = [];
@@ -49,7 +51,7 @@ function addUser(memberid, name)
     var searchVal = memberid;
     for (var i=0 ; i < obj.users_info.length ; i++)
     {
-        if (obj.users_info[i][searchField] == searchVal) {
+        if (users_info[i][searchField] == searchVal) {
             results.push(obj.users_info[i]);
         }
     }
@@ -60,7 +62,8 @@ function addUser(memberid, name)
     }
     else
     {
-        obj.users_info.push({"id": memberid, "name": realName(name), "psn": psnID(name)});
+        users_info.push({"id": memberid, "name": realName(name), "psn": psnID(name)});
+        saveData("data/users_info.json", users_info);
         return(true);
     }
 }
