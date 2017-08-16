@@ -49,10 +49,10 @@ function addUser(memberid, name)
     var results = [];
     var searchField = "id";
     var searchVal = memberid;
-    for (var i=0 ; i < obj.users_info.length ; i++)
+    for (var i=0 ; i < users_info.length ; i++)
     {
         if (users_info[i][searchField] == searchVal) {
-            results.push(obj.users_info[i]);
+            results.push(users_info[i]);
         }
     }
     //if (users_info.filter(function (user) { return user.id == memberid}).length != 0)\
