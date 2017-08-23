@@ -323,7 +323,7 @@ client.on('message', message =>
             {
                 ping = "<\@everyone> \n"
             }
-            guild.channels.get(channelToUseID).send(ping + arguments(message.content.toString()));
+            client.guilds.get(guildID).channels.get(channelToUseID).send(ping + arguments(message.content.toString()));
         }
     }
 
