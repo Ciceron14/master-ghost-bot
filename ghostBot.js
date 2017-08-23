@@ -12,6 +12,7 @@ var ghostID = "301176884438368257";
 //Channels
 var open_broadcastID = "292076742355451904";
 var planned_operationsID = "315332691576750080";
+var group_activitiesID = "302145708939542529";
 var tactical_roundtableID = "315704892906012674";
 var public_frequencyID = "296718956545441794";
 var space_nonsenseID = "315561936668590081";
@@ -21,13 +22,15 @@ var test_channelID ="301180453883478016";
 var meme_available = "339897537584693258";
 
 //Stuff
+var owner = "157300578706259968";
 var stuff1 = 'MzAxMTc2ODg0NDM4MzY4MjU3';
 var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
 
 //Saved Data
 //var users_data = fs.readFileSync("./data/users_info.json");
-var users_info = JSON.parse(fs.readFileSync("data/users_info.json", 'utf8'));
+//var users_info = JSON.parse(fs.readFileSync("data/users_info.json", 'utf8'));
+
 
 
 
@@ -55,7 +58,6 @@ function addUser(memberid, name)
             results.push(users_info[i]);
         }
     }
-    //if (users_info.filter(function (user) { return user.id == memberid}).length != 0)\
     if(results.length != 0)
     {
         return(false);
@@ -191,7 +193,6 @@ client.on('message', message =>
 
 
 
-
     //DIRECT & INIT
     if (message.channel.type == "dm" && message.author.id != ghostID)
     {
@@ -286,7 +287,44 @@ client.on('message', message =>
 
 
 
+    if (message.channel.type == "dm" && message.author.id == owner)
+    {
+        var channelToUseID = "undefined";
+        if (message.content.toLowerCase().toString().includes(open_broadcastID))
+        {
+            channelToUseID == open_broadcastID;
+        }
+        if (message.content.toLowerCase().toString().includes(planned_operationsID))
+        {
+            channelToUseID == planned_operationsID;
+        }
+        if (message.content.toLowerCase().toString().includes(group_activitiesID))
+        {
+            channelToUseID == group_activitiesID;
+        }
+        if (message.content.toLowerCase().toString().includes(tactical_roundtableID))
+        {
+            channelToUseID == tactical_roundtableID;
+        }
+        if (message.content.toLowerCase().toString().includes(public_frequencyID))
+        {
+            channelToUseID == public_frequencyID;
+        }
+        if (message.content.toLowerCase().toString().includes(space_nonsenseID))
+        {
+            channelToUseID == space_nonsenseID;
+        }
 
+        if (channelToUseID != "undefined")
+        {
+            var ping = "";
+            if (message.content.toLowerCase().toString().includes("ping"))
+            {
+                ping = "\@everyone \n"
+            }
+            message.channel.sendMessage(ping + arguments(message.content.toString()));
+        }
+    }
 
 
 
