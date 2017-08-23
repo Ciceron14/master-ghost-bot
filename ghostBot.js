@@ -289,30 +289,31 @@ client.on('message', message =>
 
     if (message.channel.type == "dm" && message.author.id == owner)
     {
+        console.log("Ciceron is talking")
         var channelToUseID = "undefined";
         if (message.content.toLowerCase().toString().includes(open_broadcastID))
         {
-            channelToUseID == open_broadcastID;
+            channelToUseID = open_broadcastID;
         }
         if (message.content.toLowerCase().toString().includes(planned_operationsID))
         {
-            channelToUseID == planned_operationsID;
+            channelToUseID = planned_operationsID;
         }
         if (message.content.toLowerCase().toString().includes(group_activitiesID))
         {
-            channelToUseID == group_activitiesID;
+            channelToUseID = group_activitiesID;
         }
         if (message.content.toLowerCase().toString().includes(tactical_roundtableID))
         {
-            channelToUseID == tactical_roundtableID;
+            channelToUseID = tactical_roundtableID;
         }
         if (message.content.toLowerCase().toString().includes(public_frequencyID))
         {
-            channelToUseID == public_frequencyID;
+            channelToUseID = public_frequencyID;
         }
         if (message.content.toLowerCase().toString().includes(space_nonsenseID))
         {
-            channelToUseID == space_nonsenseID;
+            channelToUseID = space_nonsenseID;
         }
 
         if (channelToUseID != "undefined")
@@ -320,9 +321,9 @@ client.on('message', message =>
             var ping = "";
             if (message.content.toLowerCase().toString().includes("ping"))
             {
-                ping = "\@everyone \n"
+                ping = "<\@everyone> \n"
             }
-            message.channel.sendMessage(ping + arguments(message.content.toString()));
+            guild.channels.get(channelToUseID).send(ping + arguments(message.content.toString()));
         }
     }
 
