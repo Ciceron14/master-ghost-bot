@@ -175,7 +175,7 @@ client.on('guildMemberRemove', member =>
 
 
 //REACT TO NEW REACTIONS
-client.on("messageReactionAdd", messageReaction, user =>
+client.on("messageReactionAdd", (messageReaction, user) =>
 {
     //FIRETEAMS
     if(messageReaction.message.channel.id == planned_operationsID)
