@@ -16,9 +16,14 @@ var group_activitiesID = "302145708939542529";
 var tactical_roundtableID = "315704892906012674";
 var public_frequencyID = "296718956545441794";
 var space_nonsenseID = "315561936668590081";
+var conglomerate_history = "352493075374931969";
 var test_channelID ="301180453883478016";
 
 //Roles
+var initialized = "328988528543531021";
+var allies  = "300841294010253312";
+var conglomerate = "292077959894794241";
+var in_trial = "";
 var meme_available = "339897537584693258";
 
 //Stuff
@@ -26,6 +31,33 @@ var owner = "157300578706259968";
 var stuff1 = 'MzAxMTc2ODg0NDM4MzY4MjU3';
 var stuff2 = 'FJrFvqEU1GhFxNYTP-q3FZ6U';
 var stuff3 = '.DHPAZA.74_';
+
+//Dictionnaries
+var jokes = [
+"I had a very good joke, but I Phogoth it.",
+"Why are titans' eyes always hurting ? \nBecause they can't blink.",
+"Why shouldn't you have sex with the Templar? \nBecause he has harpies.",
+"Why did the Archon Priest get locked up? \nVandallism.",
+"What do you call two acolytes claping hands? \nA Hive five.",
+"Why did the Archon Priest get locked up? \nVandallism.",
+"Hey, are your pants purple ? \nBecause that ass is legendary.",
+"I have a crush on one of the Archons... I guess you could say I've Fallen in love.",
+"I went to a Hive party last week. \nIt was pretty enthralling.",
+"Why can't Xur get a girlfriend ? \nBecause he doesn't have any Icebreaker.",
+"What is a Knight's favorite game ? \nHive and seek.",
+"What do Voidwalkers apply to chaffed skin ? \nNova Balm.",
+"Why are some servitors called 'High Servitors' ? \nDregs.",
+"Okay, seriously, one more bad pun and I'm getting the Hellmouth of here.",
+"What do bowling pins hate in Destiny ? \nStrikes.",
+"I wanted to make a joke... but all the good ones Archon.",
+"I never understood the hype about the Kellslayer's Helm. \nIt looks rather plane to me.",
+"Yo mamma so fat that when she puts on Chatterwhite everybody thinks she's the Traveller",
+"What do Hive give each others on Christmas ? \nPresents of Crota.",
+"When I die I want my LFG team to burry me. \nSo they can let me down one last time.",
+"What does the Traveller blame when his message doesn't get accros ? \nHis Speakers.",
+"What do the Vex eat for breakfast ? \nCornfluxes.",
+"How does Oryx measure his ships' speed ? \nIn Dreadknots"
+];
 
 //Saved Data
 //var users_data = fs.readFileSync("./data/users_info.json");
@@ -46,6 +78,11 @@ function saveData(filePath, dataToSave)
     }
 }
 
+function pickLine(dictionnary)
+{
+    i = Math.floor(Math.random() * (dictionnary.length));
+    return(dictionnary[i]);
+}
 
 function addUser(memberid, name)
 {
@@ -91,18 +128,24 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
-function findFireteam(ID, str)
+function addToFireteam(message, user)
 {
-    client.channels.get('315332691576750080').fetchPinnedMessages()
-        .then(messages => console.log(`Received ${messages.size} messages`))//message.edit(message.content + str))
-        .catch(console.error);
+    var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
+    if (message.indexOf(toAdd.toString()) >= 0)
+        {
+            ;
+        }
+    else
+        {
+            message.edit(message.content + "\n" + toAdd);
+        }
 }
+
 
 client.on('ready', () =>
 {
     console.log('Ghost is online');
 });
-
 
 
 
@@ -131,7 +174,19 @@ client.on('guildMemberRemove', member =>
 
 
 
-
+//REACT TO NEW REACTIONS
+client.on("messageReactionAdd", messageReaction, user =>
+{
+    //FIRETEAMS
+    if(messageReaction.message.channel.id == planned_operationsID)
+        {
+            //Joined Fireteam
+            if(messageReaction.emoji.name.toString()[0] == "_")
+                {
+                    addToFireteam(messageReaction.message, user)
+                }
+        }
+})
 
 
 
@@ -144,46 +199,23 @@ client.on('message', message =>
     {
         client.guilds.get(guildID).members.get(message.author.id).hoistRole
         //var rolesList = [].concat.apply([], client.guilds.get("guildID").members.get(message.author.id).roles)
-        if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
-        {
-            client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
-        }
-        else
-        {
-            message.delete();
-            message.author.sendMessage("Wait until you have a new meme available, check your roles");
-        }
+        if (message.content.toLowerCase().toString().includes('meme'))
+            {
+                if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
+                {
+                    client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
+                }
+                else
+                {
+                    message.delete();
+                    message.author.sendMessage("Wait until you have a new meme available, check your roles");
+                }
+            }
 
         //Bot tells a destiny pun
-        if (message.content.toLowerCase().toString().includes('pun') || message.content.toLowerCase().toString().includes('joke'))
+        if (Math.random() < 0.05)
         {
-            jokes = [
-                "I had a very good joke, but I Phogoth it.",
-                "Why are titans' eyes always hurting ? \nBecause they can't blink.",
-                "Why shouldn't you have sex with the Templar? \nBecause he has harpies.",
-                "Why did the Archon Priest get locked up? \nVandallism.",
-                "What do you call two acolytes claping hands? \nA Hive five.",
-                "Why did the Archon Priest get locked up? \nVandallism.",
-                "Hey, are your pants purple ? \nBecause that ass is legendary.",
-                "I have a crush on one of the Archons... I guess you could say I've Fallen in love.",
-                "I went to a Hive party last week. \nIt was pretty enthralling.",
-                "Why can't Xur get a girlfriend ? \nBecause he doesn't have any Icebreaker.",
-                "What is a Knight's favorite game ? \nHive and seek.",
-                "What do Voidwalkers apply to chaffed skin ? \nNova Balm.",
-                "Why are some servitors called 'High Servitors' ? \nDregs.",
-                "Okay, seriously, one more bad pun and I'm getting the Hellmouth of here.",
-                "What do bowling pins hate in Destiny ? \nStrikes.",
-                "I wanted to make a joke... but all the good ones Archon.",
-                "I never understood the hype about the Kellslayer's Helm. \nIt looks rather plane to me.",
-                "Yo mamma so fat that when she puts on Chatterwhite everybody thinks she's the Traveller",
-                "What do Hive give each others on Christmas ? \nPresents of Crota.",
-                "When I die I want my LFG team to burry me. \nSo they can let me down one last time.",
-                "What does the Traveller blame when his message doesn't get accros ? \nHis Speakers.",
-                "What do the Vex eat for breakfast ? \nCornfluxes.",
-                "How does Oryx measure his ships' speed ? \nIn Dreadknots"
-                ];
-            i = Math.floor(Math.random() * (jokes.length));
-            message.channel.send(jokes[i]);
+            message.channel.send(pickLine(jokes));
         }
 
     }
@@ -247,16 +279,17 @@ client.on('message', message =>
                 else if (message.content.toLowerCase().toString().includes("clan"))
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
-                    message.channel.sendMessage("Well, you're all set. I opened up the public channel, contact the Command to join the clan !");
-                    client.guilds.get(guildID).members.get(message.author.id).addRole("328988528543531021");
+                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels, go meet the members, if they vote for you you'll join the clan !");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(in_trial);
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(initialized);
                     initializing.splice(col/2, 1);
                 }
                 else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
-                    client.guilds.get(guildID).members.get(message.author.id).addRole("300841294010253312");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(allies);
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
-                    client.guilds.get(guildID).members.get(message.author.id).addRole("328988528543531021");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(initialized);
                     initializing.splice(col/2, 1);
                 }
                 else
@@ -379,7 +412,7 @@ client.on('message', message =>
 
 
         //LFG AND OPERATIONS
-        if(message.channel.id == planned_operationsID)
+        if(message.channel.id == group_activitiesID)
         {
             //CREATE
             if (message.content.toLowerCase().toString().includes('new') || message.content.toLowerCase().toString().includes('create'))
@@ -387,44 +420,24 @@ client.on('message', message =>
                 argString = arguments(message.content.toLowerCase().toString());
                 if (argString.length <= 0)
                 {
-                    message.channel.send('I need a fireteam name Guardian. Please include `new *or* create *+* "fireteam name"` in your request.');
+                    message.channel.send('I need a description Guardian. Please include `new *or* create *+* "description of what you will be doing"` in your request.');
                 }
                 else
                 {
                     args = argString.split(" ");
                     var keywords = args.length + 1;
-                    var fireteamName = '';
+                    var description = '';
                     while (keywords > 1)
                     {
-                        fireteamName += args[args.length - keywords + 1] + " ";
+                        description += args[args.length - keywords + 1] + " ";
                         keywords -= 1;
                     }
-                    fireteamName.substring(0, fireteamName.length - 1);
-
-                    //findFireteam('334875452554608640', "Edited that fucker");
-                    message.channel.send('Fireteam: ' + fireteamName + '\n- ' + psnID(message.member.displayName));
-                    
-                    /*fs.writeFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + ' \n', function (err)
-                    {
-                        if (err)
-                        {
-                            message.channel.send('Hum... Not sure what happened, but I was not able to create your fireteam...')
-                        }
-                        else
-                        {
-                                message.channel.send('Your fireteam "' + fireteamName + '" has been created !');
-                        }
-                    });*/
+                    description.substring(0, description.length - 1);
+                    message.channel.send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
                 }
             }
             //JOIN
             else if (message.content.toLowerCase().toString().includes('join')) {
-                argString = arguments(message.content.toLowerCase().toString());
-                if (argString.length <= 0)
-                {
-                    message.channel.send('You need a fireteam to join a fireteam. Please include `join *+* "fireteam name"` in your request.');
-                }
-                else
                 {
                     args = argString.split(" ");
                     var keywords = args.length + 1;
@@ -471,36 +484,6 @@ client.on('message', message =>
                     else
                     {
                         message.channel.send('Hum... I was not able to find your fireteam...')
-                    }
-                }
-            }
-            //DELETE
-            else if (message.content.toLowerCase().toString().includes('delete'))
-            {
-                argString = arguments(message.content.toLowerCase().toString());
-                if (argString.length <= 0) 
-                {
-                    message.channel.send('I need a fireteam name to be able to delete it. Please include `delete, fireteam, "fireteam name"` in your request.');
-                }
-                else
-                {
-                    args = argString.split(" ");
-                    var keywords = args.length + 1;
-                    var fireteamName = '';
-                    while (keywords > 1)
-                    {
-                        fireteamName += args[args.length - keywords + 1] + " ";
-                        keywords -= 1;
-                    }
-                    fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
-                    {
-                        fs.unlink("fireteams/-" + fireteamName + ".txt")
-                        message.channel.send('Your fireteam "' + fireteamName + '" has been deleted !');
-                    }
-                    else
-                    {
-                        message.channel.send('Did you just tell me to delete a fireteam that does not exist ?')
                     }
                 }
             }
