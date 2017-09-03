@@ -131,7 +131,7 @@ function arguments(str)
 function addToFireteam(message, user)
 {
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
-    if (message.indexOf(toAdd.toString()) >= 0)
+    if (message.toString().indexOf(toAdd) >= 0)
         {
             ;
         }
@@ -433,7 +433,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.channel.send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
+                    message.channels.get(planned_operationsID).send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
                 }
             }
             //JOIN
