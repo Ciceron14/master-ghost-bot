@@ -433,7 +433,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    guild.channels.get(planned_operationsID).send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
+                    message.guild.channels.get(planned_operationsID).send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
                 }
             }
             //JOIN
