@@ -179,6 +179,18 @@ function removeFromFireteam(message, user)
         }
 }
 
+function kickInactive(message)
+{
+    var membersList = client.guilds.get(guildID).members.array();
+    for(var i=0 ; i < membersList.length ; i++)
+    {
+        if(message.createdAt.getTime() - membersList[i].lastMessage.createdAt.getTime() >= 1.21e+9)
+            {
+                console.log(membersList[i].nickname);
+            }
+    }
+}
+
 
 
 
@@ -443,10 +455,11 @@ client.on('message', message =>
         }
 
 
-
-
-
-
+        //Bot checks inactive players
+        if(message.content.toLowerCase().toString().includes('clean up') && message.author.id == owner)
+        {
+            kickInactive(message);
+        }
 
         //TACTICS AND KNOWLEDGE
         if(message.channel.id == tactical_roundtableID)
