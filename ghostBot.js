@@ -259,12 +259,12 @@ client.on('message', message =>
         if(message.author.id == owner && message.isMentioned(ghostID))
         {
             var membersList = client.guilds.get(guildID).members;
-            console.log(membersList);
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
                 Object.keys(membersList).forEach(function (key) 
                 {
-                    client.guilds.get(guildID).members.get(key).addRole(meme_available);
+                    membersList[key].addRole(meme_available);
+                    console.log(membersList[key] + "YO WADDUP");
                 });
                 /*
                 for(var member in membersList)
