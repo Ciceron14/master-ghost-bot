@@ -160,11 +160,11 @@ function removeFromFireteam(message, user)
             var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
             var newFireteam = message.toString().replace(toRemove,'');
             message.edit(newFireteam);
-            if(message.content.toString().indexOf("Members:\n- ") == -1)
+            if(message.content.toString().indexOf("Members:** \n- ") == -1)
                 {
                     setTimeout(function () 
                     {
-                        if (message.content.toString().indexOf("Members:\n- ") == -1)
+                        if (message.content.toString().indexOf("Members:** \n- ") == -1)
                             {
                                 message.delete();
                             }
@@ -180,6 +180,7 @@ client.on('ready', () =>
 {
     console.log('Ghost is online');
     client.guilds.get(guildID).channels.get(planned_operationsID).fetchMessages();
+    client.guilds.get(guildID).fetchMembers();
 });
 
 
@@ -244,19 +245,16 @@ client.on('message', message =>
     //MEMES AND ALL
     if (message.channel.id == space_nonsenseID)
     {
-        client.guilds.get(guildID).members.get(message.author.id).hoistRole
-        if (message.content.toLowerCase().toString().includes('meme'))
-            {
-                if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
-                {
-                    client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
-                }
-                else
-                {
-                    message.delete();
-                    message.author.sendMessage("You already posted a meme for this contest");
-                }
-            }
+        if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
+        {
+            client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
+            message.react("caydethumbsup");
+        }
+        else
+        {
+            message.delete();
+            message.author.sendMessage("You already posted a meme for this contest... How are you still talking ??");
+        }
 
         //Bot tells a destiny pun
         if (Math.random() < 0.05)
