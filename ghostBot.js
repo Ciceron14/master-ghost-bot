@@ -248,13 +248,33 @@ client.on('message', message =>
         if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
         {
             client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
-            message.react("caydethumbsup");
+            message.react("<:caydethumbsup:354293197742276608>");
         }
-        else
+        else if(message.author.id != owner)
         {
             message.delete();
             message.author.sendMessage("You already posted a meme for this contest... How are you still talking ??");
         }
+
+        if(message.author.id == owner)
+        {
+            if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
+            {
+                forEach(member in client.guilds.get(guildID).members)
+                {
+                    member.addRole(meme_available);
+                }
+            }
+
+            else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over"))
+            {
+                forEach(member in client.guilds.get(guildID).members)
+                {
+                    member.removeRole(meme_available);
+                }
+            }
+        }
+
 
         //Bot tells a destiny pun
         if (Math.random() < 0.05)
