@@ -130,13 +130,18 @@ function arguments(str)
 
 function hasReacted(message, user)
 {
-    reactions = message.reactions;
-    reactions.forEach(function(element) {
-        if (element.toString() == user.id)
-            {
-                return(true);
-            }
-    }, this);
+    reactions = message.reactions.array();
+    for(var i=0 ; i < reactions.length ; i++)
+    {
+        var usersWhoReacted = reactions[i].users.array();
+        for(var j=0 ; i < usersWhoReacted.length ; j++)
+        {
+            if (usersWhoReacted[j] == user)
+                {
+                    return(true);
+                }
+        }
+    }
     return(false);
 }
 
