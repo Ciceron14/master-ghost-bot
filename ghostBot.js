@@ -147,7 +147,7 @@ function addToFireteam(message, user, reaction)
         {
             reaction.remove(user);
         }
-    else if(message.toString().indexOf(toAdd) >= 0)
+    else if(message.toString().indexOf(toAdd) < 0)
         {
             message.edit(message.content + "\n- " + toAdd);
         }
