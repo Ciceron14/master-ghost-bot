@@ -209,6 +209,7 @@ client.on("messageReactionAdd", (messageReaction, user) =>
                     addToFireteam(messageReaction.message, user, messageReaction)
                 }
         }
+    messageReaction.message.channel.send("yep");
 })
 
 //REACT TO DELETED REACTIONS
