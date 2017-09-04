@@ -248,7 +248,7 @@ client.on('message', message =>
         if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
         {
             client.guilds.get(guildID).members.get(message.author.id).removeRole(meme_available);
-            message.react("<:caydethumbsup:354293197742276608>");
+            message.react(":caydethumbsup:354293197742276608");
         }
         else if(message.author.id != owner)
         {
@@ -260,17 +260,17 @@ client.on('message', message =>
         {
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
-                forEach(member in client.guilds.get(guildID).members)
+                forEach(key in client.guilds.get(guildID).members)
                 {
-                    member.addRole(meme_available);
+                    key.addRole(meme_available);
                 }
             }
 
             else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over"))
             {
-                forEach(member in client.guilds.get(guildID).members)
+                for(key in client.guilds.get(guildID).members)
                 {
-                    member.removeRole(meme_available);
+                    key.removeRole(meme_available);
                 }
             }
         }
