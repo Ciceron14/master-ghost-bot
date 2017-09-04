@@ -262,7 +262,7 @@ client.on('message', message =>
             {
                 for(var member in client.guilds.get(guildID).members)
                 {
-                    client.guilds.get(guildID).members[member].addRole(meme_available);
+                    client.guilds.get(guildID).members.get(member).addRole(meme_available);
                 }
             }
 
@@ -270,7 +270,7 @@ client.on('message', message =>
             {
                 for(var member in client.guilds.get(guildID).members)
                 {
-                    client.guilds.get(guildID).members[member].removeRole(meme_available);
+                    client.guilds.get(guildID).members.get(member).removeRole(meme_available);
                 }
             }
         }
