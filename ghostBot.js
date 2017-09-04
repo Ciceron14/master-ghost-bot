@@ -131,7 +131,7 @@ function arguments(str)
 function hasReacted(message, user)
 {
     reactions = message.reactions;
-    for(i = 0; i <= reactions.length; i++);
+    /*for(i = 0; i <= reactions.length; i++);
         {
             var usersWhoReacted = reactions[i][1].users
             for(j = 0; j <= usersWhoReacted.length; j++)
@@ -141,7 +141,13 @@ function hasReacted(message, user)
                         return(true);
                     }
             }
-        }
+        }*/
+    reactions.forEach(function(element) {
+        if (element.toString == user.id)
+            {
+                return(true);
+            }
+    }, this);
     return(false);
 }
 
