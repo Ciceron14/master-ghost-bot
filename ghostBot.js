@@ -260,7 +260,7 @@ client.on('message', message =>
         {
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
-                forEach(key in client.guilds.get(guildID).members)
+                for(key in client.guilds.get(guildID).members)
                 {
                     key.addRole(meme_available);
                 }
