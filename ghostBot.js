@@ -131,19 +131,8 @@ function arguments(str)
 function hasReacted(message, user)
 {
     reactions = message.reactions;
-    /*for(i = 0; i <= reactions.length; i++);
-        {
-            var usersWhoReacted = reactions[i][1].users
-            for(j = 0; j <= usersWhoReacted.length; j++)
-            {
-                if(usersWhoReacted[j][1].id == user.id)
-                    {
-                        return(true);
-                    }
-            }
-        }*/
     reactions.forEach(function(element) {
-        if (element.toString == user.id)
+        if (element.toString() == user.id)
             {
                 return(true);
             }
@@ -160,7 +149,7 @@ function addToFireteam(message, user, reaction)
         }
     else
         {
-            message.edit(message.content + "\n" + toAdd);
+            message.edit(message.content + "\n- " + toAdd);
         }
 }
 
@@ -228,7 +217,7 @@ client.on("messageReactionRemove", (messageReaction, user) =>
     //FIRETEAMS
     if(messageReaction.message.channel.id == planned_operationsID)
         {
-            //Joined Fireteam
+            //Left Fireteam
             if(messageReaction.emoji.name.toString()[0] == "_")
                 {
                     removeFromFireteam(messageReaction.message, user)
