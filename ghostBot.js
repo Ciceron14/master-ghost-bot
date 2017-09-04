@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 var fs = require('fs');
 
-const clientAutoFetch = new Client({ autofetch: [
+const clientAutoFetch = new Discord.Client({ autofetch: [
     'MESSAGE_CREATE',
     'MESSAGE_UPDATE',
     'MESSAGE_REACTION_ADD',
