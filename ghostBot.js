@@ -164,7 +164,6 @@ function removeFromFireteam(message, user)
                 {
                     setTimeout(function () 
                     {
-                        console.log(newFireteam.indexOf("Members:\n- "))
                         if (message.content.toString().indexOf("Members:\n- ") == -1)
                             {
                                 message.delete();
@@ -464,7 +463,7 @@ client.on('message', message =>
             //CREATE
             if (message.content.toLowerCase().toString().includes('new') || message.content.toLowerCase().toString().includes('create'))
             {
-                argString = arguments(message.content.toLowerCase().toString());
+                argString = arguments(message.content.toString());
                 if (argString.length <= 0)
                 {
                     message.channel.send('I need a description Guardian. Please include `new *or* create *+* "description of what you will be doing"` in your request.');
@@ -480,7 +479,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('\nFireteam:\n ' + description + "\nMembers:\n- " + psnID(message.member.displayName));
+                    message.guild.channels.get(planned_operationsID).send('**\nFireteam:\n**' + description + "**\nMembers:** \n- " + psnID(message.member.displayName));
                     message.channel.send("I have created your fireteam.\nYou can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
