@@ -160,12 +160,12 @@ function removeFromFireteam(message, user)
             var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
             var newFireteam = message.toString().replace(toRemove,'');
             message.edit(newFireteam);
-            if(newFireteam.indexOf("Members:\n- ") == -1)
+            if(message.content.toString().indexOf("Members:\n- ") == -1)
                 {
                     setTimeout(function () 
                     {
                         console.log(newFireteam.indexOf("Members:\n- "))
-                        if (newFireteam.indexOf("Members:\n- ") == -1)
+                        if (message.content.toString().indexOf("Members:\n- ") == -1)
                             {
                                 message.delete();
                             }
