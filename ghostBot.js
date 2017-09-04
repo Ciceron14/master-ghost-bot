@@ -263,16 +263,15 @@ client.on('message', message =>
             {
                 for(var i=0 ; i < membersList.length ; i++)
                 {
-                    console.log(member + ": " + membersList[i]);
                     membersList[i].addRole(meme_available);
                 }
             }
 
             else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over") || message.content.toLowerCase().toString().includes("stop"))
             {
-                for(var member in membersList)
+                for(var i=0 ; i < membersList.length ; i++)
                 {
-                    client.guilds.get(guildID).members.get(member).removeRole(meme_available);
+                    membersList[i].removeRole(meme_available);
                 }
             }
         }
