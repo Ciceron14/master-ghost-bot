@@ -1,10 +1,5 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({ autofetch: [
-    'MESSAGE_CREATE',
-    'MESSAGE_UPDATE',
-    'MESSAGE_REACTION_ADD',
-    'MESSAGE_REACTION_REMOVE',
-] });
+const client = new Discord.Client();
 
 var fs = require('fs');
 
@@ -172,6 +167,7 @@ function removeFromFireteam(message, user)
 client.on('ready', () =>
 {
     console.log('Ghost is online');
+    client.guilds.get(guildID).channels.get(planned_operationsID).fetchMessages();
 });
 
 
