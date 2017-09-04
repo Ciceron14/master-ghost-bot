@@ -258,11 +258,13 @@ client.on('message', message =>
 
         if(message.author.id == owner && message.isMentioned(ghostID))
         {
+            console.log("ciceron is talking in memes");
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
+                console.log("ciceron want to start a contest");
                 for(var member in client.guilds.get(guildID).members)
                 {
-                    console.log(member);
+                    console.log(member+ " hum");
                     client.guilds.get(guildID).members.get(member).addRole(meme_available);
                 }
             }
