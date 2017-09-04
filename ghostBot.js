@@ -480,7 +480,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('\nFireteam:\n ' + description + "\nMembers:\n- " + psnID(message.member.displayName) + "`");
+                    message.guild.channels.get(planned_operationsID).send('\nFireteam:\n ' + description + "\nMembers:\n- " + psnID(message.member.displayName));
                     message.channel.send("I have created your fireteam.\nYou can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
