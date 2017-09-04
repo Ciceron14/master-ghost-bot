@@ -124,7 +124,7 @@ function psnID(str)
 function arguments(str)
 {
     var start_pos = str.indexOf('"') + 1;
-    var end_pos = str.indexOf('"', start_pos);
+    var end_pos = str.lastIndexOf('"', start_pos);
     return str.substring(start_pos, end_pos);
 }
 
@@ -479,7 +479,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('**\nFireteam:\n**' + description + "**\nMembers:** \n- " + psnID(message.member.displayName));
+                    message.guild.channels.get(planned_operationsID).send('**Fireteam:\n**' + description + "**\nMembers:** \n- " + psnID(message.member.displayName));
                     message.channel.send("I have created your fireteam.\nYou can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
