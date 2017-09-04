@@ -124,7 +124,7 @@ function psnID(str)
 function arguments(str)
 {
     var start_pos = str.indexOf('"') + 1;
-    var end_pos = str.lastIndexOf('"', start_pos);
+    var end_pos = str.lastIndexOf('"');
     return str.substring(start_pos, end_pos);
 }
 
