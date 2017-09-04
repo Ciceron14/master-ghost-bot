@@ -262,6 +262,7 @@ client.on('message', message =>
             {
                 for(var member in client.guilds.get(guildID).members)
                 {
+                    console.log(member);
                     client.guilds.get(guildID).members.get(member).addRole(meme_available);
                 }
             }
