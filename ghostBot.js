@@ -256,21 +256,21 @@ client.on('message', message =>
             message.author.sendMessage("You already posted a meme for this contest... How are you still talking ??");
         }
 
-        if(message.author.id == owner)
+        if(message.author.id == owner && message.isMentioned(ghostID))
         {
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
-                for(key in client.guilds.get(guildID).members)
+                for(var member in client.guilds.get(guildID).members)
                 {
-                    client.guilds.get(guildID).members.get(key).addRole(meme_available);
+                    member.addRole(meme_available);
                 }
             }
 
-            else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over"))
+            else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over") || message.content.toLowerCase().toString().includes("stop"))
             {
-                for(key in client.guilds.get(guildID).members)
+                for(var member in client.guilds.get(guildID).members)
                 {
-                    client.guilds.get(guildID).members.get(key).removeRole(meme_available);
+                    member.removeRole(meme_available);
                 }
             }
         }
