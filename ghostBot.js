@@ -160,11 +160,11 @@ function removeFromFireteam(message, user)
             var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
             var newFireteam = message.toString().replace(toRemove,'');
             message.edit(newFireteam);
-            if(newFireteam.indexOf("\n\nMembers:\n- ") < 0)
+            if(newFireteam.indexOf("Members:\n- ") < 0)
                 {
                     setTimeout(function () 
                     {
-                        if (newFireteam.indexOf("\n\nMembers:\n- ") < 0)
+                        if (newFireteam.indexOf("Members:\n- ") < 0)
                             {
                                 message.delete();
                             }
@@ -245,7 +245,6 @@ client.on('message', message =>
     if (message.channel.id == space_nonsenseID)
     {
         client.guilds.get(guildID).members.get(message.author.id).hoistRole
-        //var rolesList = [].concat.apply([], client.guilds.get("guildID").members.get(message.author.id).roles)
         if (message.content.toLowerCase().toString().includes('meme'))
             {
                 if (client.guilds.get(guildID).members.get(message.author.id).roles.has(meme_available))
@@ -480,7 +479,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('Fireteam:\n `' + description + "`\nMembers:\n- " + psnID(message.member.displayName));
+                    message.guild.channels.get(planned_operationsID).send('`**Fireteam:**\n ' + description + "\n**Members:**\n- " + psnID(message.member.displayName) + "`");
                     message.channel.send("I have created your fireteam.\nYou can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
