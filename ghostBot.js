@@ -128,16 +128,43 @@ function arguments(str)
     return str.substring(start_pos, end_pos);
 }
 
-function addToFireteam(message, user)
+function hasReacted(message, user)
+{
+    reactions = message.reactions;
+    for(i = 0; i <= reactions.length; i++);
+        {
+            var usersWhoReacted = reactions[i][1].users
+            for(j = 0; j <= usersWhoReacted.length; j++)
+            {
+                if(usersWhoReacted[j][1].id == user.id)
+                    {
+                        return(true);
+                    }
+            }
+        }
+    return(false);
+}
+
+function addToFireteam(message, user, reaction)
 {
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
     if (message.toString().indexOf(toAdd) >= 0)
         {
-            ;
+            reaction.remove(user);
         }
     else
         {
             message.edit(message.content + "\n" + toAdd);
+        }
+}
+
+function removeFromFireteam(message, user)
+{
+    if(hasReacted(message, user) == false)
+        {
+            var toRemove = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
+            var newFireteam = message.toString().replace(toRemove,'');
+            message.edit(newFireteam);
         }
 }
 
@@ -174,6 +201,7 @@ client.on('guildMemberRemove', member =>
 
 
 
+
 //REACT TO NEW REACTIONS
 client.on("messageReactionAdd", (messageReaction, user) =>
 {
@@ -183,7 +211,21 @@ client.on("messageReactionAdd", (messageReaction, user) =>
             //Joined Fireteam
             if(messageReaction.emoji.name.toString()[0] == "_")
                 {
-                    addToFireteam(messageReaction.message, user)
+                    addToFireteam(messageReaction.message, user, messageReaction)
+                }
+        }
+})
+
+//REACT TO DELETED REACTIONS
+client.on("messageReactionRemove", (messageReaction, user) =>
+{
+    //FIRETEAMS
+    if(messageReaction.message.channel.id == planned_operationsID)
+        {
+            //Joined Fireteam
+            if(messageReaction.emoji.name.toString()[0] == "_")
+                {
+                    removeFromFireteam(messageReaction.message, user)
                 }
         }
 })
@@ -434,57 +476,6 @@ client.on('message', message =>
                     }
                     description.substring(0, description.length - 1);
                     message.guild.channels.get(planned_operationsID).send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
-                }
-            }
-            //JOIN
-            else if (message.content.toLowerCase().toString().includes('join')) {
-                {
-                    args = argString.split(" ");
-                    var keywords = args.length + 1;
-                    var fireteamName = '';
-                    while (keywords > 1) {
-                        fireteamName += args[args.length - keywords + 1] + " ";
-                        keywords -= 1;
-                    }
-                    fireteamName.substring(0, fireteamName.length - 1)
-                    if (fs.existsSync("fireteams/-" + fireteamName + ".txt"))
-                    {
-                        fs.readFile("fireteams/-" + fireteamName + ".txt", function (err, data)
-                        {
-                            if (err)
-                            {
-                                message.channel.send('Something went wrong...')
-                            }
-                            if (data.indexOf(message.member.displayName.toString()) >= 0)
-                            {
-                                message.channel.send('Looks like you already joined that fireteam, here is the current roster :')
-                                fs.readFile("fireteams/-" + fireteamName + ".txt", 'utf8', function (err, data)
-                                 {
-                                    if (err)
-                                     {
-                                        message.channel.send('Hum... well I think you joined but I cannot find it... weird.')
-                                    }
-                                    message.channel.send(data);
-                                    message.channel.send('Anyway, I will not tell the others that you had forgotten about it, do not worry.')
-                                });
-                            }
-                            else
-                            {
-                                fs.appendFile("fireteams/-" + fireteamName + ".txt", message.member.displayName.toString() + '\n', function (err)
-                                {
-                                    if (err)
-                                    {
-                                        message.channel.send('Hum... I could not add you to the fireteam...')
-                                    }
-                                    message.channel.send('You joined "' + fireteamName + '" !');
-                                });
-                            }
-                        });
-                    }
-                    else
-                    {
-                        message.channel.send('Hum... I was not able to find your fireteam...')
-                    }
                 }
             }
             //UNCOMPLETE COMMAND
