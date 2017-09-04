@@ -162,7 +162,13 @@ function removeFromFireteam(message, user)
             message.edit(newFireteam);
             if(newFireteam.indexOf("\n\nMembers:\n- ") < 0)
                 {
-                    message.delete();
+                    setTimeout(function () 
+                    {
+                        if (newFireteam.indexOf("\n\nMembers:\n- "))
+                            {
+                                message.delete();
+                            }
+                    }, 5000);
                 }
         }
 }
@@ -213,7 +219,6 @@ client.on("messageReactionAdd", (messageReaction, user) =>
                     addToFireteam(messageReaction.message, user, messageReaction)
                 }
         }
-    messageReaction.message.channel.send("yep");
 })
 
 //REACT TO DELETED REACTIONS
@@ -476,6 +481,7 @@ client.on('message', message =>
                     }
                     description.substring(0, description.length - 1);
                     message.guild.channels.get(planned_operationsID).send('Fireteam:\n ' + description + "\n\nMembers:\n- " + psnID(message.member.displayName));
+                    message.channel.send("I have created your fireteam. You can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
             //UNCOMPLETE COMMAND
