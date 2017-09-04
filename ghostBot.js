@@ -1,14 +1,12 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
-
-var fs = require('fs');
-
-const clientAutoFetch = new Discord.Client({ autofetch: [
+const client = new Discord.Client({ autofetch: [
     'MESSAGE_CREATE',
     'MESSAGE_UPDATE',
     'MESSAGE_REACTION_ADD',
     'MESSAGE_REACTION_REMOVE',
 ] });
+
+var fs = require('fs');
 
 var initializing = [];
 
