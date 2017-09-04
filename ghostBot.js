@@ -262,7 +262,7 @@ client.on('message', message =>
             {
                 for(var member in client.guilds.get(guildID).members)
                 {
-                    member.addRole(meme_available);
+                    client.guilds.get(guildID).members[member].addRole(meme_available);
                 }
             }
 
@@ -270,7 +270,7 @@ client.on('message', message =>
             {
                 for(var member in client.guilds.get(guildID).members)
                 {
-                    member.removeRole(meme_available);
+                    client.guilds.get(guildID).members[member].removeRole(meme_available);
                 }
             }
         }
@@ -515,7 +515,7 @@ client.on('message', message =>
 
 
         //Bot is mentionned but no command is given
-        else
+        else if(message.author.id != owner)
         {
             message.channel.send('How can I help you, ' + realName(message.member.id, message.member.displayName));
         }
