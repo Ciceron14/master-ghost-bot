@@ -164,7 +164,7 @@ function removeFromFireteam(message, user)
                 {
                     setTimeout(function () 
                     {
-                        if (newFireteam.indexOf("\n\nMembers:\n- "))
+                        if (newFireteam.indexOf("\n\nMembers:\n- ") < 0)
                             {
                                 message.delete();
                             }
@@ -255,7 +255,7 @@ client.on('message', message =>
                 else
                 {
                     message.delete();
-                    message.author.sendMessage("Wait until you have a new meme available, check your roles");
+                    message.author.sendMessage("You already posted a meme for this contest");
                 }
             }
 
@@ -415,7 +415,7 @@ client.on('message', message =>
         //Bot informs member of its status
         if (message.content.toLowerCase().toString().includes('status'))
         {
-            message.channel.send('I can now initialize new members, ' + realName(message.member.displayName) + "\nI am also working on a way to stock fireteams, to make it easier for you to plan upcoming games.");
+            message.channel.send('Fireteams are ready ' + realName(message.member.displayName) + "\nI am now working on a way to implemnt memes contests");
         }
 
 
@@ -480,8 +480,8 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('Fireteam:\n ' + description + "\n\nMembers:\n- " + psnID(message.member.displayName));
-                    message.channel.send("I have created your fireteam. You can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
+                    message.guild.channels.get(planned_operationsID).send('Fireteam:\n `' + description + "`\nMembers:\n- " + psnID(message.member.displayName));
+                    message.channel.send("I have created your fireteam.\nYou can go select your subclass by reacting to the fireteam in <#315332691576750080> !")
                 }
             }
             //UNCOMPLETE COMMAND
