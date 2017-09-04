@@ -262,18 +262,24 @@ client.on('message', message =>
             console.log(membersList);
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
-                for(key in membersList)
+                Object.keys(membersList).forEach(function (key) 
+                {
+                    client.guilds.get(guildID).members.get(key).addRole(meme_available);
+                });
+                /*
+                for(var member in membersList)
                 {
                     console.log(member + " hum");
-                    client.guilds.get(guildID).members.get(key).addRole(meme_available);
+                    client.guilds.get(guildID).members.get(member).addRole(meme_available);
                 }
+                */
             }
 
             else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over") || message.content.toLowerCase().toString().includes("stop"))
             {
-                for(key in membersList)
+                for(var member in membersList)
                 {
-                    client.guilds.get(guildID).members.get(key).removeRole(meme_available);
+                    client.guilds.get(guildID).members.get(member).removeRole(meme_available);
                 }
             }
         }
