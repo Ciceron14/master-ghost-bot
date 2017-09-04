@@ -143,16 +143,13 @@ function hasReacted(message, user)
                 }
         }
     }
-    if(timesReacted > 1)
-        return(true);
-    else
-        return(false);
+    return(timesReacted)
 }
 
 function addToFireteam(message, user, reaction)
 {
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
-    if (hasReacted(message, user))
+    if (hasReacted(message, user) > 1)
         {
             reaction.remove(user);
         }
@@ -164,7 +161,7 @@ function addToFireteam(message, user, reaction)
 
 function removeFromFireteam(message, user)
 {
-    if(hasReacted(message, user) == false)
+    if(hasReacted(message, user) < 1)
         {
             var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
             var newFireteam = message.toString().replace(toRemove,'');
