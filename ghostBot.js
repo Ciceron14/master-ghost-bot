@@ -259,20 +259,21 @@ client.on('message', message =>
         if(message.author.id == owner && message.isMentioned(ghostID))
         {
             var membersList = client.guilds.get(guildID).members;
+            console.log(membersList);
             if(message.content.toLowerCase().toString().includes("start") || message.content.toLowerCase().toString().includes("new") || message.content.toLowerCase().toString().includes("open"))
             {
-                for(var member in membersList)
+                for(key in membersList)
                 {
                     console.log(member + " hum");
-                    client.guilds.get(guildID).members.get(member).addRole(meme_available);
+                    client.guilds.get(guildID).members.get(key).addRole(meme_available);
                 }
             }
 
             else if(message.content.toLowerCase().toString().includes("end") || message.content.toLowerCase().toString().includes("over") || message.content.toLowerCase().toString().includes("stop"))
             {
-                for(var member in membersList)
+                for(key in membersList)
                 {
-                    client.guilds.get(guildID).members.get(member).removeRole(meme_available);
+                    client.guilds.get(guildID).members.get(key).removeRole(meme_available);
                 }
             }
         }
