@@ -130,7 +130,8 @@ function arguments(str)
 
 function hasReacted(message, user)
 {
-    reactions = message.reactions.array();
+    var reactions = message.reactions.array();
+    var timesReacted = 0;
     for(var i=0 ; i < reactions.length ; i++)
     {
         var usersWhoReacted = reactions[i].users.array();
@@ -138,11 +139,14 @@ function hasReacted(message, user)
         {
             if (usersWhoReacted[j] == user)
                 {
-                    return(true);
+                    timesReacted +=1 ;
                 }
         }
     }
-    return(false);
+    if(timesReacted > 1)
+        return(true);
+    else
+        return(false);
 }
 
 function addToFireteam(message, user, reaction)
