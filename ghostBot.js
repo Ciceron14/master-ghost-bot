@@ -160,8 +160,14 @@ function removeFromFireteam(message, user)
             var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
             var newFireteam = message.toString().replace(toRemove,'');
             message.edit(newFireteam);
+            if(newFireteam.indexOf("\n\nMembers:\n- ") < 0)
+                {
+                    message.delete();
+                }
         }
 }
+
+
 
 
 client.on('ready', () =>
@@ -169,9 +175,6 @@ client.on('ready', () =>
     console.log('Ghost is online');
     client.guilds.get(guildID).channels.get(planned_operationsID).fetchMessages();
 });
-
-
-
 
 
 
@@ -472,7 +475,7 @@ client.on('message', message =>
                         keywords -= 1;
                     }
                     description.substring(0, description.length - 1);
-                    message.guild.channels.get(planned_operationsID).send('Fireteam: ' + description + '\n- ' + psnID(message.member.displayName));
+                    message.guild.channels.get(planned_operationsID).send('Fireteam:\n ' + description + "\n\nMembers:\n- " + psnID(message.member.displayName));
                 }
             }
             //UNCOMPLETE COMMAND
