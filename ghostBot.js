@@ -184,10 +184,14 @@ function kickInactive(message)
     var membersList = client.guilds.get(guildID).members.array();
     for(var i=0 ; i < membersList.length ; i++)
     {
-        if(message.createdAt.getTime() - membersList[i].lastMessage.createdAt.getTime() >= 1.21e+9)
-            {
-                console.log(membersList[i].nickname);
-            }
+        if(membersList[i].lastMessage.createdAt == null)
+        {
+            console.log(membersList[i].nickname);
+        }
+        else if(message.createdAt.getTime() - membersList[i].lastMessage.createdAt.getTime() >= 1.21e+9)
+        {
+            console.log(membersList[i].nickname);
+        }
     }
 }
 
