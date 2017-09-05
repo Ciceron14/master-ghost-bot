@@ -184,7 +184,7 @@ function kickInactive(message)
     var membersList = client.guilds.get(guildID).members.array();
     for(var i=0 ; i < membersList.length ; i++)
     {
-        if(membersList[i].lastMessage.createdAt == null)
+        if(membersList[i].lastMessage == null)
         {
             console.log(membersList[i].nickname);
         }
