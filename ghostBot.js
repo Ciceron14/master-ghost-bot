@@ -202,6 +202,10 @@ client.on('ready', () =>
 {
     console.log('Ghost is online');
     client.guilds.get(guildID).channels.get(planned_operationsID).fetchMessages();
+    client.guilds.get(guildID).channels.get(public_frequencyID).fetchMessages();
+    client.guilds.get(guildID).channels.get(group_activitiesID).fetchMessages();
+    client.guilds.get(guildID).channels.get(space_nonsenseID).fetchMessages();
+    client.guilds.get(guildID).channels.get(tactical_roundtableID).fetchMessages();
     client.guilds.get(guildID).fetchMembers();
 });
 
