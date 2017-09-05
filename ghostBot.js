@@ -186,11 +186,11 @@ function kickInactive(message)
     {
         if(membersList[i].lastMessage == null)
         {
-            console.log(membersList[i].nickname);
+            console.log(membersList[i].nickname + " never posted");
         }
         else if(message.createdAt.getTime() - membersList[i].lastMessage.createdAt.getTime() >= 1.21e+9)
         {
-            console.log(membersList[i].nickname);
+            console.log(membersList[i].nickname + "posted 2 weeks ago");
         }
     }
 }
