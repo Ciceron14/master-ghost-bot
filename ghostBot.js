@@ -162,7 +162,7 @@ function addToFireteam(message, user, reaction)
         }
     else
         {
-             message.edit(message.content + "*\n- " + toAdd + "'s guest*");
+             message.edit(message.content + "\n- *" + toAdd + "'s guest*");
         }
 }
 
@@ -189,7 +189,7 @@ function removeFromFireteam(message, user, reaction)
     }
     else
     {
-        var toRemove = "*\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname) + "'s guest*";
+        var toRemove = "\n- *" + psnID(client.guilds.get(guildID).members.get(user.id).nickname) + "'s guest*";
         var newFireteam = message.toString().replace(toRemove,'');
         message.edit(newFireteam);
         if(message.content.toString().indexOf("Members:** \n- ") == -1)
