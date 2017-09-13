@@ -149,7 +149,7 @@ function hasReacted(message, user)
 function addToFireteam(message, user, reaction)
 {
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
-    if(messageReaction.emoji.name.toString() != "_GuestPass")
+    if(reaction.emoji.name.toString() != "_GuestPass")
         {
             if (hasReacted(message, user) > 1)
                 {
@@ -168,7 +168,7 @@ function addToFireteam(message, user, reaction)
 
 function removeFromFireteam(message, user, reaction)
 {
-    if(messageReaction.emoji.name.toString() != "_GuestPass")
+    if(reaction.emoji.name.toString() != "_GuestPass")
     {
         if(hasReacted(message, user) < 1)
             {
