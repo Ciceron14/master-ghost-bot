@@ -149,34 +149,60 @@ function hasReacted(message, user)
 function addToFireteam(message, user, reaction)
 {
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
-    if (hasReacted(message, user) > 1)
+    if(messageReaction.emoji.name.toString() != "_GuestPass")
         {
-            reaction.remove(user);
+            if (hasReacted(message, user) > 1)
+                {
+                    reaction.remove(user);
+                }
+            if(message.toString().indexOf(toAdd) < 0)
+                {
+                    message.edit(message.content + "\n- " + toAdd);
+                }
         }
-    if(message.toString().indexOf(toAdd) < 0)
+    else
         {
-            message.edit(message.content + "\n- " + toAdd);
+             message.edit(message.content + "*\n- " + toAdd + "'s guest*");
         }
 }
 
-function removeFromFireteam(message, user)
+function removeFromFireteam(message, user, reaction)
 {
-    if(hasReacted(message, user) < 1)
-        {
-            var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
-            var newFireteam = message.toString().replace(toRemove,'');
-            message.edit(newFireteam);
-            if(message.content.toString().indexOf("Members:** \n- ") == -1)
-                {
-                    setTimeout(function () 
+    if(messageReaction.emoji.name.toString() != "_GuestPass")
+    {
+        if(hasReacted(message, user) < 1)
+            {
+                var toRemove = "\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname);
+                var newFireteam = message.toString().replace(toRemove,'');
+                message.edit(newFireteam);
+                if(message.content.toString().indexOf("Members:** \n- ") == -1)
                     {
+                        setTimeout(function () 
+                        {
+                            if (message.content.toString().indexOf("Members:** \n- ") == -1)
+                                {
+                                    message.delete();
+                                }
+                        }, 10000);
+                    }
+            }
+    }
+    else
+    {
+        var toRemove = "*\n- " + psnID(client.guilds.get(guildID).members.get(user.id).nickname) + "'s guest*";
+        var newFireteam = message.toString().replace(toRemove,'');
+        message.edit(newFireteam);
+        if(message.content.toString().indexOf("Members:** \n- ") == -1)
+            {
+                setTimeout(function () 
+                {
                         if (message.content.toString().indexOf("Members:** \n- ") == -1)
-                            {
-                                message.delete();
-                            }
-                    }, 10000);
-                }
-        }
+                        {
+                            message.delete();
+                        }
+                }, 10000);
+            }
+    }
 }
 
 function kickInactive(message)
@@ -184,11 +210,11 @@ function kickInactive(message)
     var membersList = client.guilds.get(guildID).members.array();
     for(var i=0 ; i < membersList.length ; i++)
     {
-        if(membersList[i].lastMessage == null)
+        if(membersList[i].lastMessageID == null)
         {
             console.log(membersList[i].nickname + " never posted");
         }
-        else if(message.createdAt.getTime() - membersList[i].lastMessage.createdAt.getTime() >= 1.21e+9)
+        else if(message.createdAt.getTime() - membersList[i].lastMessageID.createdAt.getTime() >= 1.21e+9)
         {
             console.log(membersList[i].nickname + "posted 2 weeks ago");
         }
@@ -239,13 +265,13 @@ client.on("messageReactionAdd", (messageReaction, user) =>
 {
     //FIRETEAMS
     if(messageReaction.message.channel.id == planned_operationsID)
-        {
+    {
             //Joined Fireteam
-            if(messageReaction.emoji.name.toString()[0] == "_")
-                {
-                    addToFireteam(messageReaction.message, user, messageReaction)
-                }
+        if(messageReaction.emoji.name.toString()[0] == "_")
+        {
+            addToFireteam(messageReaction.message, user, messageReaction)
         }
+    }
 })
 
 //REACT TO DELETED REACTIONS
@@ -257,7 +283,7 @@ client.on("messageReactionRemove", (messageReaction, user) =>
             //Left Fireteam
             if(messageReaction.emoji.name.toString()[0] == "_")
                 {
-                    removeFromFireteam(messageReaction.message, user)
+                    removeFromFireteam(messageReaction.message, user, messageReaction)
                 }
         }
 })
