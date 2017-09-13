@@ -159,7 +159,6 @@ function addToFireteam(message, user, reaction)
                 {
                     reaction.remove(user);
                 }
-
         }
     else
         {
@@ -176,7 +175,7 @@ function removeFromFireteam(message, user, reaction)
     var toRemoveGuest = "\n- *" + psnID(client.guilds.get(guildID).members.get(user.id).nickname) + "'s guest*";
     if(reaction.emoji.name.toString() != "_GuestPass")
     {
-        if( (hasReacted() < 1 && message.content.toString().indexOf(toRemoveGuest) == -1) || (hasReacted() < 2 && message.content.toString().indexOf(toRemoveGuest) >= 0))
+        if( (hasReacted(message, user) < 1 && message.content.toString().indexOf(toRemoveGuest) == -1) || (hasReacted(message, user) < 2 && message.content.toString().indexOf(toRemoveGuest) >= 0))
             {
                 var newFireteam = message.toString().replace(toRemove,'');
                 message.edit(newFireteam);
