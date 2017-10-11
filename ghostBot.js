@@ -150,7 +150,7 @@ function addToFireteam(message, user, reaction)
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
     if(reaction.emoji.name.toString() != "_GuestPass")
         {
-            if ((message.content.toString().indexOf("\n- " + toAdd) == -1 && hasReacted(message, user) < 1) || (message.content.toString().indexOf(message.content + "\n- *" + toAdd + "'s guest*" == -1) && message.content.toString().indexOf("\n- " + toAdd) == -1 && hasReacted(message, user) < 2))
+            if ((message.content.toString().indexOf("\n- " + toAdd) == -1 && hasReacted(message, user) < 1) || (message.content.toString().indexOf(message.content + "\n- *" + toAdd + "'s guest*" != -1) && message.content.toString().indexOf("\n- " + toAdd) == -1 && hasReacted(message, user) < 2))
                 {
                     message.edit(message.content + "\n- " + toAdd);
                 }
