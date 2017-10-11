@@ -20,10 +20,9 @@ var conglomerate_history = "352493075374931969";
 var test_channelID ="301180453883478016";
 
 //Roles
-var initialized = "328988528543531021";
+var initialized = "361234041829195786";
 var allies  = "300841294010253312";
-var conglomerate = "292077959894794241";
-var in_trial = "";
+var on_trial = "353991360099123200";
 var meme_available = "339897537584693258";
 
 //Stuff
@@ -151,11 +150,15 @@ function addToFireteam(message, user, reaction)
     var toAdd = psnID(client.guilds.get(guildID).members.get(user.id).nickname);
     if(reaction.emoji.name.toString() != "_GuestPass")
         {
-            if (message.content.toString().indexOf("\n- " + toAdd) == -1)
+            if (message.content.toString().indexOf("\n- " + toAdd) == -1 && hasReacted(message, user) < 1)
                 {
                     message.edit(message.content + "\n- " + toAdd);
                 }
-            else
+            else if (hasReacted(message, user) <= 1 && message.content.toString().indexOf("\n- " + toAdd) != -1 && message.content.toString().indexOf(message.content + "\n- *" + toAdd + "'s guest*") != -1)
+                {
+                    ;
+                }
+            else if (hasReacted(message, user) > 1)
                 {
                     reaction.remove(user);
                 }
@@ -274,6 +277,10 @@ client.on("messageReactionAdd", (messageReaction, user) =>
         {
             addToFireteam(messageReaction.message, user, messageReaction)
         }
+        else
+        {
+            messageReaction.remove(user);
+        }
     }
 })
 
@@ -285,9 +292,13 @@ client.on("messageReactionRemove", (messageReaction, user) =>
         {
             //Left Fireteam
             if(messageReaction.emoji.name.toString()[0] == "_")
-                {
-                    removeFromFireteam(messageReaction.message, user, messageReaction)
-                }
+            {
+                removeFromFireteam(messageReaction.message, user, messageReaction)
+            }
+            else
+            {
+                messageReaction.remove(user);
+            }
         }
 })
 
@@ -357,7 +368,7 @@ client.on('message', message =>
             {
                 if (message.content.toLowerCase().toString() == "yes")
                 {
-                    message.channel.sendMessage("Awesome ! Guardian, I need to know your PSN ID and how you want to be called by the members of the Conglomerate (your name).");
+                    message.channel.sendMessage("Awesome ! Guardian, I need to know your PSN ID and how you want to be called by the members of the Conglomerate (your nickname).");
                     message.channel.sendMessage("Please, type both like this: `NAME [PSN ID]`... Do not type anything else !");
                     initializing[col/2][1] += 1;
                 }
@@ -399,13 +410,15 @@ client.on('message', message =>
                 else if (message.content.toLowerCase().toString().includes("clan"))
                 {
                     message.channel.sendMessage("Sweet ! I will let the command know !");
-                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels, go meet the members, if they vote for you you'll join the clan !");
-                    client.guilds.get(guildID).members.get(message.author.id).addRole(in_trial);
+                    message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels, go meet the members, be active and you'll get promoted to Member !");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(initialized);
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(on_trial);
                     initializing.splice(col/2, 1);
                 }
                 else if (message.content.toLowerCase().toString().includes("ally") || message.content.toLowerCase().toString().includes("solo"))
                 {
                     message.channel.sendMessage("Got it ! I will tell the others. Please contact the command if you are the leader of your own clan.");
+                    client.guilds.get(guildID).members.get(message.author.id).addRole(initialized);
                     client.guilds.get(guildID).members.get(message.author.id).addRole(allies);
                     message.channel.sendMessage("Well, you're all set. I opened up the Conglomerate channels for you !");
                     initializing.splice(col/2, 1);
